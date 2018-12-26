@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project version="2G - 1.7.6" name="LED_CUBE">
+  <Target name="LED_CUBE" isCurrent="1">
+    <Device manufacturerId="9" manufacturerName="ST" chipId="305" chipName="STM32F103C8" boardId="" boardName=""/>
+    <BuildOption>
+      <Compile>
+        <Option name="OptimizationLevel" value="0"/>
+        <Option name="UseFPU" value="0"/>
+        <Option name="UserEditCompiler" value="-std=c99"/>
+        <Option name="SupportCPlusplus" value="1"/>
+        <Includepaths>
+          <Includepath path="."/>
+        </Includepaths>
+        <DefinedSymbols>
+          <Define name="STM32F103C8"/>
+          <Define name="STM32F10X_MD"/>
+          <Define name="USE_STDPERIPH_DRIVER"/>
+          <Define name="__ASSEMBLY__"/>
+          <Define name="SUPPORT_CPLUSPLUS"/>
+          <Define name="USE_DMA"/>
+        </DefinedSymbols>
+      </Compile>
+      <Link useDefault="0">
+        <Option name="DiscardUnusedSection" value="0"/>
+        <Option name="UserEditLinkder" value=""/>
+        <Option name="UseMemoryLayout" value="1"/>
+        <Option name="nostartfiles" value="0"/>
+        <Option name="LTO" value="0"/>
+        <Option name="IsNewStartupCode" value="1"/>
+        <Option name="Library" value="Not use C Library"/>
+        <Option name="UserEditLinker" value="-lstdc++; "/>
+        <LinkedLibraries/>
+        <MemoryAreas debugInFlashNotRAM="1">
+          <Memory name="IROM1" type="ReadOnly" size="0x00010000" startValue="0x08000000"/>
+          <Memory name="IRAM1" type="ReadWrite" size="0x00005000" startValue="0x20000000"/>
+          <Memory name="IROM2" type="ReadOnly" size="" startValue=""/>
+          <Memory name="IRAM2" type="ReadWrite" size="" startValue=""/>
+        </MemoryAreas>
+        <LocateLinkFile path="c:/coocox/coide/configuration/programdata/led_cube/link.ld" type="0"/>
+      </Link>
+      <Output>
+        <Option name="OutputFileType" value="0"/>
+        <Option name="Path" value="./"/>
+        <Option name="Name" value="LED_CUBE"/>
+        <Option name="HEX" value="1"/>
+        <Option name="BIN" value="1"/>
+      </Output>
+      <User>
+        <UserRun name="Run#1" type="Before" checked="0" value=""/>
+        <UserRun name="Run#1" type="After" checked="0" value=""/>
+      </User>
+    </BuildOption>
+    <DebugOption>
+      <Option name="org.coocox.codebugger.gdbjtag.core.adapter" value="ST-Link"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.debugMode" value="SWD"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.clockDiv" value="2M"/>
+      <Option name="org.coocox.codebugger.gdbjtag.corerunToMain" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkgdbserver" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.userDefineGDBScript" value=""/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.targetEndianess" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.jlinkResetMode" value="Type 0: Normal"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.resetMode" value="SYSRESETREQ"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifSemihost" value="0"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ifCacheRom" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.ipAddress" value="127.0.0.1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.portNumber" value="2009"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.autoDownload" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.verify" value="1"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.downloadFuction" value="Erase Effected"/>
+      <Option name="org.coocox.codebugger.gdbjtag.core.defaultAlgorithm" value="STM32F10x_MD_64.elf"/>
+    </DebugOption>
+    <ExcludeFile/>
+  </Target>
+  <Components path="./"/>
+  <Files>
+    <File name="inc/hw_config.h" path="inc/hw_config.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_lib.h" path="STM32_USB-FS-Device_Driver/inc/usb_lib.h" type="1"/>
+    <File name="Src/font.c" path="Src/font.c" type="1"/>
+    <File name="Src/usb_istr.c" path="Src/usb_istr.c" type="1"/>
+    <File name="Src/hw_config.c" path="Src/hw_config.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_usart.h" type="1"/>
+    <File name="inc/modes.h" path="inc/modes.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_flash.c" type="1"/>
+    <File name="cmsis_boot/stm32f10x.h" path="cmsis_boot/stm32f10x.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/Release_Notes.html" path="STM32_USB-FS-Device_Driver/Release_Notes.html" type="1"/>
+    <File name="inc/stm32f10x_it.h" path="inc/stm32f10x_it.h" type="1"/>
+    <File name="cmsis_boot/stm32f10x_conf.h" path="cmsis_boot/stm32f10x_conf.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/src" path="" type="2"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/misc.h" path="STM32F10x_StdPeriph_Driver/inc/misc.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_can.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_can.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_tim.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_cec.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_core.c" path="STM32_USB-FS-Device_Driver/src/usb_core.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_mem.h" path="STM32_USB-FS-Device_Driver/inc/usb_mem.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_bkp.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_dma.c" type="1"/>
+    <File name="cmsis_boot/startup/startup_stm32f10x_md.c" path="cmsis_boot/startup/startup_stm32f10x_md.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_regs.h" path="STM32_USB-FS-Device_Driver/inc/usb_regs.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver" path="" type="2"/>
+    <File name="STM32_USB-FS-Device_Driver/inc" path="" type="2"/>
+    <File name="cmsis_boot/system_stm32f10x.c" path="cmsis_boot/system_stm32f10x.c" type="1"/>
+    <File name="Src/usb_endp.c" path="Src/usb_endp.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_sil.c" path="STM32_USB-FS-Device_Driver/src/usb_sil.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_def.h" path="STM32_USB-FS-Device_Driver/inc/usb_def.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_flash.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_flash.h" type="1"/>
+    <File name="inc/usb_prop.h" path="inc/usb_prop.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_i2c.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_type.h" path="STM32_USB-FS-Device_Driver/inc/usb_type.h" type="1"/>
+    <File name="inc/usb_conf.h" path="inc/usb_conf.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_crc.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_crc.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_init.c" path="STM32_USB-FS-Device_Driver/src/usb_init.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_gpio.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_spi.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_crc.c" type="1"/>
+    <File name="Src/main.c" path="Src/main.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_gpio.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_fsmc.c" type="1"/>
+    <File name="cmsis" path="" type="2"/>
+    <File name="cmsis_boot/system_stm32f10x.h" path="cmsis_boot/system_stm32f10x.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_cec.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_cec.h" type="1"/>
+    <File name="Src/debug.c" path="Src/debug.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dma.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dma.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_sdio.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_rtc.c" type="1"/>
+    <File name="Src/string.c" path="Src/string.c" type="1"/>
+    <File name="Src/interface.c" path="Src/interface.c" type="1"/>
+    <File name="Src/modes.c" path="Src/modes.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_rcc.h" type="1"/>
+    <File name="inc/debug.h" path="inc/debug.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/misc.c" path="STM32F10x_StdPeriph_Driver/src/misc.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/Release_Notes.html" path="STM32F10x_StdPeriph_Driver/Release_Notes.html" type="1"/>
+    <File name="cmsis_boot" path="" type="2"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_sdio.c" type="1"/>
+    <File name="inc/interface.h" path="inc/interface.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_fsmc.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_fsmc.h" type="1"/>
+    <File name="cmsis_boot/startup" path="" type="2"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_tim.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src" path="" type="2"/>
+    <File name="Src/usb_desc.c" path="Src/usb_desc.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_wwdg.c" type="1"/>
+    <File name="inc/usb_pwr.h" path="inc/usb_pwr.h" type="1"/>
+    <File name="Src/usb_prop.c" path="Src/usb_prop.c" type="1"/>
+    <File name="inc/random.h" path="inc/random.h" type="1"/>
+    <File name="inc/usb_istr.h" path="inc/usb_istr.h" type="1"/>
+    <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_wwdg.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_wwdg.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_i2c.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_exti.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_exti.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_exti.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_adc.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_spi.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_spi.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_core.h" path="STM32_USB-FS-Device_Driver/inc/usb_core.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dac.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dac.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc" path="" type="2"/>
+    <File name="inc/string.h" path="inc/string.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_pwr.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_iwdg.c" type="1"/>
+    <File name="cmsis/core_cm3.h" path="cmsis/core_cm3.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_init.h" path="STM32_USB-FS-Device_Driver/inc/usb_init.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_dac.c" type="1"/>
+    <File name="Src/random.c" path="Src/random.c" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_int.h" path="STM32_USB-FS-Device_Driver/inc/usb_int.h" type="1"/>
+    <File name="inc/usb_desc.h" path="inc/usb_desc.h" type="1"/>
+    <File name="inc" path="" type="2"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_int.c" path="STM32_USB-FS-Device_Driver/src/usb_int.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_can.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dbgmcu.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_dbgmcu.h" type="1"/>
+    <File name="Src/stm32f10x_it.c" path="Src/stm32f10x_it.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_bkp.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_bkp.h" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_dbgmcu.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_usart.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_rtc.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_rtc.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver" path="" type="2"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_mem.c" path="STM32_USB-FS-Device_Driver/src/usb_mem.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_iwdg.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_iwdg.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/inc/usb_sil.h" path="STM32_USB-FS-Device_Driver/inc/usb_sil.h" type="1"/>
+    <File name="STM32_USB-FS-Device_Driver/src/usb_regs.c" path="STM32_USB-FS-Device_Driver/src/usb_regs.c" type="1"/>
+    <File name="Src" path="" type="2"/>
+    <File name="STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c" path="STM32F10x_StdPeriph_Driver/src/stm32f10x_rcc.c" type="1"/>
+    <File name="Src/usb_pwr.c" path="Src/usb_pwr.c" type="1"/>
+    <File name="STM32F10x_StdPeriph_Driver/inc/stm32f10x_pwr.h" path="STM32F10x_StdPeriph_Driver/inc/stm32f10x_pwr.h" type="1"/>
+  </Files>
+</Project>
