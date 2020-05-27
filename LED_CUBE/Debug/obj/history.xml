@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<history>
+   <processor signature="arm-none-eabi-gcc 6.4.0 x86_64-pc-cygwin -mcpu=cortex-m3 -mthumb -Wall -ffunction-sections -g -O0 -std=c99 -c -DSTM32F103C8 -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER -D__ASSEMBLY__ -DSUPPORT_CPLUSPLUS -DUSE_DMA -IH:\#WORK\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver\inc -IH:\#WORK\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver\inc -IH:\#WORK\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver -IH:\#WORK\_STM32 -IH:\#WORK\_STM32\LED_CUBEfinal\cmsis -IH:\#WORK\_STM32\LED_CUBEfinal\inc -IH:\#WORK\_STM32\LED_CUBEfinal\cmsis_boot -IH:\#WORK\_STM32\LED_CUBEfinal -IH:\#WORK\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver">
+      <target file="stm32f10x_exti.o" lastModified="1625efbab2e">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_iwdg.o" lastModified="1625efbb806">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_gpio.o" lastModified="1625efba65f">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="usb_sil.o" lastModified="1625efbad08">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_sil.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="misc.o" lastModified="1625efbb357">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\misc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="usb_endp.o" lastModified="1625efbb04a">
+         <source file="..\..\..\Src\usb_endp.c" lastModified="1485c1a2b7d"/>
+      </target>
+      <target file="usb_istr.o" lastModified="1625efbb704">
+         <source file="..\..\..\Src\usb_istr.c" lastModified="147e4ec03bf"/>
+      </target>
+      <target file="interface.o" lastModified="1625efbb3f8">
+         <source file="..\..\..\Src\interface.c" lastModified="151e31a1bd1"/>
+      </target>
+      <target file="modes.o" lastModified="1625f27f37c">
+         <source file="..\..\..\Src\modes.c" lastModified="1625f27eea7"/>
+      </target>
+      <target file="usb_regs.o" lastModified="1625efba2ff">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_regs.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="system_stm32f10x.o" lastModified="1625efba1b4">
+         <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="136600b3910"/>
+      </target>
+      <target file="stm32f10x_usart.o" lastModified="1625efbac81">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="usb_prop.o" lastModified="1625efba6fb">
+         <source file="..\..\..\Src\usb_prop.c" lastModified="151fde85997"/>
+      </target>
+      <target file="stm32f10x_wwdg.o" lastModified="1625efbb492">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="random.o" lastModified="1625efbb2d9">
+         <source file="..\..\..\Src\random.c" lastModified="14a455db2e8"/>
+      </target>
+      <target file="stm32f10x_flash.o" lastModified="1625efbadb4">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_tim.o" lastModified="1625efb9fd2">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_it.o" lastModified="1625efbae33">
+         <source file="..\..\..\Src\stm32f10x_it.c" lastModified="147e4d8e09d"/>
+      </target>
+      <target file="string.o" lastModified="1625efb9ec4">
+         <source file="..\..\..\Src\string.c" lastModified="14a43324fd2"/>
+      </target>
+      <target file="debug.o" lastModified="1625efbaf3d">
+         <source file="..\..\..\Src\debug.c" lastModified="14a61db7b98"/>
+      </target>
+      <target file="hw_config.o" lastModified="1625efba5c7">
+         <source file="..\..\..\Src\hw_config.c" lastModified="151e3162067"/>
+      </target>
+      <target file="stm32f10x_sdio.o" lastModified="1625efbafce">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_cec.o" lastModified="1625efbaeb8">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_rtc.o" lastModified="1625efb9d73">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_rcc.o" lastModified="1625efbaaa5">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_can.o" lastModified="1625efba52f">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_dac.o" lastModified="1625efba834">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="core_cm3.o" lastModified="1625efba02f">
+         <source file="..\..\..\cmsis\core_cm3.c" lastModified="147dfac8925"/>
+      </target>
+      <target file="stm32f10x_pwr.o" lastModified="1625efba422">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_adc.o" lastModified="1625efbabdd">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="usb_desc.o" lastModified="1625efba22e">
+         <source file="..\..\..\Src\usb_desc.c" lastModified="147fead5b09"/>
+      </target>
+      <target file="stm32f10x_fsmc.o" lastModified="1625efba3a0">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="usb_init.o" lastModified="1625efba8a9">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_init.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="stm32f10x_dbgmcu.o" lastModified="1625efba136">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_bkp.o" lastModified="1625efbb788">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_dma.o" lastModified="1625efbb0f4">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="font.o" lastModified="1625efba988">
+         <source file="..\..\..\Src\font.c" lastModified="14830017a06"/>
+      </target>
+      <target file="usb_core.o" lastModified="1625efb9e3f">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_core.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="stm32f10x_crc.o" lastModified="1625efbaa04">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="main.o" lastModified="1625f2b7cd6">
+         <source file="..\..\..\Src\main.c" lastModified="1625f2b782b"/>
+      </target>
+      <target file="usb_int.o" lastModified="1625efba0b9">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_int.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="usb_pwr.o" lastModified="1625efba7a3">
+         <source file="..\..\..\Src\usb_pwr.c" lastModified="147e4db2f0e"/>
+      </target>
+      <target file="usb_mem.o" lastModified="1625efbb65a">
+         <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_mem.c" lastModified="12ecd9b04e0"/>
+      </target>
+      <target file="startup_stm32f10x_md.o" lastModified="1625efba471">
+         <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md.c" lastModified="136600b3910"/>
+      </target>
+      <target file="stm32f10x_i2c.o" lastModified="1625efbb5dc">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c" lastModified="12ecd9b0cb0"/>
+      </target>
+      <target file="stm32f10x_spi.o" lastModified="1625efbb530">
+         <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c" lastModified="12ecd9b0cb0"/>
+      </target>
+   </processor>
+</history>

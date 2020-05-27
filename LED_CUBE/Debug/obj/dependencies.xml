@@ -1,0 +1,664 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<dependencies>
+   <includePath signature="/IH:\WORKSPACE\_STM32 /IH:\WORKSPACE\_STM32\LED_CUBEfinal /IH:\WORKSPACE\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver /IH:\WORKSPACE\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver /IH:\WORKSPACE\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver\inc /IH:\WORKSPACE\_STM32\LED_CUBEfinal\cmsis /IH:\WORKSPACE\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver\inc /IH:\WORKSPACE\_STM32\LED_CUBEfinal\cmsis_boot /IH:\WORKSPACE\_STM32\LED_CUBEfinal\inc">
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\debug.h" lastModified="14a5f57d70d">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_int.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_init.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_def.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\interface.h" lastModified="151fdb33df8">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+      </source>
+      <source file="..\..\..\Src\font.c" lastModified="14830017a06">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_regs.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="136600b3910">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="136600b3910">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\string.c" lastModified="14a43324fd2">
+         <include file="..\..\..\inc\string.h"/>
+         <include file="..\..\..\inc\modes.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_prop.h" lastModified="147e4ee92ca">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_sil.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_regs.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_desc.h" lastModified="147feaeec45">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\Src\random.c" lastModified="14a455db2e8">
+         <include file="..\..\..\inc\random.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_mem.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_sil.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md.c" lastModified="136600b3910">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f10x_conf.h" lastModified="12ecd9bd000">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_pwr.h" lastModified="147e4da5b0d">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\inc\usb_conf.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\Src\debug.c" lastModified="14a61db7b98">
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\string.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\misc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_endp.c" lastModified="1485c1a2b7d">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\stm32f10x_it.h" lastModified="147ea41b3af">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_core.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_istr.c" lastModified="147e4ec03bf">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_prop.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_core.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\stm32f10x_it.c" lastModified="147e4d8e09d">
+         <include file="..\..\..\inc\stm32f10x_it.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+      </source>
+      <source file="..\..\..\inc\hw_config.h" lastModified="151e550560d">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
+      </source>
+      <source file="..\..\..\Src\hw_config.c" lastModified="151e3162067">
+         <include file="..\..\..\inc\stm32f10x_it.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_prop.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\random.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\modes.h" lastModified="151fd15b021">
+         <include file="..\..\..\inc\interface.h"/>
+         <include file="..\..\..\inc\random.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\string.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\inc\string.h" lastModified="14a43324fe3">
+      </source>
+      <source file="..\..\..\inc\random.h" lastModified="14a455db2fd">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_desc.c" lastModified="147fead5b09">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_int.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\inc\usb_istr.h" lastModified="147e4ea38df">
+         <include file="..\..\..\inc\usb_conf.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_conf.h" lastModified="147e89ce6a5">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_init.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+   </includePath>
+   <includePath signature="/IH:\#WORK\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver\inc /IH:\#WORK\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver\inc /IH:\#WORK\_STM32\LED_CUBEfinal\STM32_USB-FS-Device_Driver /IH:\#WORK\_STM32 /IH:\#WORK\_STM32\LED_CUBEfinal\cmsis /IH:\#WORK\_STM32\LED_CUBEfinal\inc /IH:\#WORK\_STM32\LED_CUBEfinal\cmsis_boot /IH:\#WORK\_STM32\LED_CUBEfinal /IH:\#WORK\_STM32\LED_CUBEfinal\STM32F10x_StdPeriph_Driver">
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\debug.h" lastModified="14a5f57d70d">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_int.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_usart.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_init.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_def.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_i2c.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\interface.h" lastModified="151fdb33df8">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+      </source>
+      <source file="..\..\..\Src\font.c" lastModified="14830017a06">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_regs.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_pwr.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_can.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rtc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.h" lastModified="136600b3910">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_flash.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_tim.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\system_stm32f10x.c" lastModified="136600b3910">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\string.c" lastModified="14a43324fd2">
+         <include file="..\..\..\inc\string.h"/>
+         <include file="..\..\..\inc\modes.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm3.h" lastModified="136600aa0b8">
+         <sysinclude file="C:\cygwin64\usr\include\stdint.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_prop.h" lastModified="147e4ee92ca">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_sil.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_regs.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\cmsis\core_cm3.c" lastModified="147dfac8925">
+         <sysinclude file="C:\cygwin64\usr\include\stdint.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_wwdg.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_pwr.c" lastModified="147e4db32f6">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_conf.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+      </source>
+      <source file="..\..\..\Src\interface.c" lastModified="151e31a1fb9">
+         <include file="..\..\..\inc\interface.h"/>
+         <include file="..\..\..\inc\string.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_desc.h" lastModified="147feaeec45">
+      </source>
+      <source file="..\..\..\Src\modes.c" lastModified="1625f27f28f">
+         <include file="..\..\..\inc\modes.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\string.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dac.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\Src\random.c" lastModified="14a455db2e8">
+         <include file="..\..\..\inc\random.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_mem.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_sil.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\startup\startup_stm32f10x_md.c" lastModified="136600b3910">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dbgmcu.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f10x_conf.h" lastModified="12ecd9bd000">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_can.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dac.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_flash.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_pwr.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rtc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_tim.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_usart.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_wwdg.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_pwr.h" lastModified="147e4da5b0d">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\inc\usb_conf.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_bkp.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_bkp.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\Src\debug.c" lastModified="14a61db7b98">
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\string.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_exti.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\misc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\misc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_cec.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_cec.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_endp.c" lastModified="1485c1a2b7d">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\stm32f10x_it.h" lastModified="147ea41b3af">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_core.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_istr.c" lastModified="147e4ec03bf">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_prop.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dbgmcu.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_fsmc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_spi.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_spi.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_dma.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_dma.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_core.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_rcc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_exti.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\stm32f10x_it.c" lastModified="147e4d8e09d">
+         <include file="..\..\..\inc\stm32f10x_it.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_istr.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+      </source>
+      <source file="..\..\..\inc\hw_config.h" lastModified="151e550560d">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
+      </source>
+      <source file="..\..\..\Src\hw_config.c" lastModified="151e3162067">
+         <include file="..\..\..\inc\stm32f10x_it.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_prop.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\random.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_fsmc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\inc\modes.h" lastModified="151fd15b021">
+         <include file="..\..\..\inc\interface.h"/>
+         <include file="..\..\..\inc\random.h"/>
+         <include file="..\..\..\inc\debug.h"/>
+         <include file="..\..\..\inc\string.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h" lastModified="147e89f6212">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_type.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_regs.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_def.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_core.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_init.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_mem.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_int.h"/>
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_sil.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_prop.c" lastModified="151fde85997">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_conf.h"/>
+         <include file="..\..\..\inc\usb_prop.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+         <include file="..\..\..\inc\usb_pwr.h"/>
+         <include file="..\..\..\inc\hw_config.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_gpio.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_gpio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\inc\string.h" lastModified="14a43324fe3">
+      </source>
+      <source file="..\..\..\inc\random.h" lastModified="14a455db2fd">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_crc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_crc.h"/>
+      </source>
+      <source file="..\..\..\Src\usb_desc.c" lastModified="147fead5b09">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+         <include file="..\..\..\inc\usb_desc.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_adc.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_adc.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_int.h" lastModified="12ecd9b04e0">
+      </source>
+      <source file="..\..\..\inc\usb_istr.h" lastModified="147e4ea38df">
+         <include file="..\..\..\inc\usb_conf.h"/>
+      </source>
+      <source file="..\..\..\inc\usb_conf.h" lastModified="147e89ce6a5">
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_iwdg.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_iwdg.h"/>
+      </source>
+      <source file="..\..\..\cmsis_boot\stm32f10x.h" lastModified="136600b3910">
+         <include file="..\..\..\cmsis\core_cm3.h"/>
+         <include file="..\..\..\cmsis_boot\system_stm32f10x.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f10x_conf.h"/>
+         <sysinclude file="C:\cygwin64\usr\include\stdint.h"/>
+      </source>
+      <source file="..\..\..\STM32_USB-FS-Device_Driver\src\usb_init.c" lastModified="12ecd9b04e0">
+         <include file="..\..\..\STM32_USB-FS-Device_Driver\inc\usb_lib.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_i2c.h" lastModified="12ecd9b04e0">
+         <include file="..\..\..\cmsis_boot\stm32f10x.h"/>
+      </source>
+      <source file="..\..\..\STM32F10x_StdPeriph_Driver\src\stm32f10x_sdio.c" lastModified="12ecd9b0cb0">
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_sdio.h"/>
+         <include file="..\..\..\STM32F10x_StdPeriph_Driver\inc\stm32f10x_rcc.h"/>
+      </source>
+   </includePath>
+</dependencies>
