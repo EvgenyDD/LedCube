@@ -13,11 +13,11 @@
 /* Exported macro ------------------------------------------------------------*/
 /* Exported define -----------------------------------------------------------*/
 /* Exported functions ------------------------------------------------------- */
-void DebugInit();
+void DebugInit(void);
 void DebugSendString(char*);
 void DebugSendChar(char);
-void DebugSysTimeEnd();
-void DebugSysTimeStart();
+void DebugSysTimeEnd(void);
+void DebugSysTimeStart(void);
 void DebugSendNum(uint16_t Num);
 void DebugSendNumWDesc(char *string, uint16_t Num);
 

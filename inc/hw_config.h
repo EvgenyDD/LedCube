@@ -1,30 +1,23 @@
-/* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef __HW_CONFIG_H
 #define __HW_CONFIG_H
 
-/* Includes ------------------------------------------------------------------*/
+#include "stm32f10x.h"
 #include "usb_type.h"
 
-/* Exported types ------------------------------------------------------------*/
-/* Exported constants --------------------------------------------------------*/
-/* Exported macro ------------------------------------------------------------*/
-/* Exported define -----------------------------------------------------------*/
-enum WorkState{STANDALONE,	PC_MONITORING, PC_CONTROLS};
+enum WorkState
+{
+	STANDALONE = 0,
+	PC_MONITORING,
+	PC_CONTROLS
+};
 
-
-/* Exported functions ------------------------------------------------------- */
-void Initialization();
-void Set_System(void);
-void Set_USBClock(void);
+void hw_init(void);
 void Enter_LowPowerMode(void);
 void Leave_LowPowerMode(void);
-void USB_Interrupts_Config(void);
 void USB_Cable_Config(FunctionalState NewState);
 void Get_SerialNum(void);
 
 void CUBECheckState(void);
 void CUBECheckState2(void);
 
-/* External variables --------------------------------------------------------*/
-
-#endif  /*__HW_CONFIG_H*/
+#endif /*__HW_CONFIG_H*/

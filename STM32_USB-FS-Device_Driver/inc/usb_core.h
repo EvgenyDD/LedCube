@@ -17,6 +17,8 @@
 #ifndef __USB_CORE_H
 #define __USB_CORE_H
 
+#include <stm32f10x.h>
+
 /* Includes ------------------------------------------------------------------*/
 /* Exported types ------------------------------------------------------------*/
 typedef enum _CONTROL_STATE

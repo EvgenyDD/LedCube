@@ -1,235 +1,177 @@
-/**
-  ******************************************************************************
-  * @file    usb_desc.c
-  * @author  MCD Application Team
-  * @version V3.4.0
-  * @date    09-September-2013
-  * @brief   Descriptors for CUBE Demo
-  ******************************************************************************
-  * @attention
-  *
-  * <h2><center>&copy; COPYRIGHT 2012 STMicroelectronics</center></h2>
-  *
-  * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
-  * You may not use this file except in compliance with the License.
-  * You may obtain a copy of the License at:
-  *
-  *        http://www.st.com/software_license_agreement_liberty_v2
-  *
-  * Unless required by applicable law or agreed to in writing, software
-  * distributed under the License is distributed on an "AS IS" BASIS,
-  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  * See the License for the specific language governing permissions and
-  * limitations under the License.
-  *
-  ******************************************************************************
-  */
-
-
-/* Includes ------------------------------------------------------------------*/
-#include "usb_lib.h"
 #include "usb_desc.h"
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
-/* Extern variables ----------------------------------------------------------*/
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
+#include "usb_lib.h"
 
 /* USB Standard Device Descriptor */
-const uint8_t CUBE_DeviceDescriptor[CUBE_SIZ_DEVICE_DESC] =
-  {
-		    CUBE_SIZ_DEVICE_DESC,         // = 18 общая длина дескриптора устройства в байтах
-		    USB_DEVICE_DESCRIPTOR_TYPE, // bDescriptorType - показывает, что это за дескриптор. В данном случае - Device descriptor
-		    0x00, 0x02,                 // bcdUSB - какую версию стандарта USB поддерживает устройство. 2.0
+uint8_t CUBE_DeviceDescriptor[CUBE_SIZ_DEVICE_DESC] = {
+	CUBE_SIZ_DEVICE_DESC,		// = 18 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+	USB_DEVICE_DESCRIPTOR_TYPE, // bDescriptorType - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ - Device descriptor
+	0x00, 0x02,					// bcdUSB - пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ USB пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. 2.0
 
-			// класс, подкласс устройства и протокол, по стандарту USB. У нас нули, означает каждый интерфейс сам за себя
-		    0x00,                       //bDeviceClass
-		    0x00,                       //bDeviceSubClass
-		    0x00,                       //bDeviceProtocol
+	// пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ USB. пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ
+	0x00, // bDeviceClass
+	0x00, // bDeviceSubClass
+	0x00, // bDeviceProtocol
 
-		    0x40,                       //bMaxPacketSize - максимальный размер пакетов для Endpoint 0 (при конфигурировании)
+	0x40, // bMaxPacketSize - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ Endpoint 0 (пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ)
 
-			// те самые пресловутые VID и PID,  по которым и определяется, что же это за устройство.
-			// в реальных устройствах надо покупать VID, чтобы устройства можно было различать и подсовывать нужные драйвера
-		    0x83, 0x04,                 //idVendor (0x0483)
-		    0x11, 0x57,                 //idProduct (0x5711)
+	// пїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VID пїЅ PID,  пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+	// пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VID, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0x83, 0x04, // idVendor (0x0483)
+	0x11, 0x57, // idProduct (0x5711)
 
-		    0x00, 0x01,                 // bcdDevice rel. DEVICE_VER_H.DEVICE_VER_L  номер релиза устройства
+	0x00, 0x01, // bcdDevice rel. DEVICE_VER_H.DEVICE_VER_L  пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-			// дальше идут индексы строк, описывающих производителя, устройство и серийный номер.
-			// Отображаются в свойствах устройства в диспетчере устройств
-			// А по серийному номеру подключенные устройства с одинаковым VID/PID различаются системой.
-		    1,                          //Index of string descriptor describing manufacturer
-		    2,                          //Index of string descriptor describing product
-		    3,                          //Index of string descriptor describing the device serial number
-		    0x01                        // bNumConfigurations - количество возможных конфигураций. У нас одна.
-  }
-  ; /* CustomHID_DeviceDescriptor */
-
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ.
+	// пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	// пїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ VID/PID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+	1,	 // Index of string descriptor describing manufacturer
+	2,	 // Index of string descriptor describing product
+	3,	 // Index of string descriptor describing the device serial number
+	0x01 // bNumConfigurations - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ. пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ.
+}; /* CustomHID_DeviceDescriptor */
 
 /* USB Configuration Descriptor */
 /*   All Descriptors (Configuration, Interface, Endpoint, Class, Vendor */
-const uint8_t CUBE_ConfigDescriptor[CUBE_SIZ_CONFIG_DESC] =
-  {
-		    0x09, 			// bLength: длина дескриптора конфигурации
-		    USB_CONFIGURATION_DESCRIPTOR_TYPE, // bDescriptorType: тип дескриптора - конфигурация
-		    CUBE_SIZ_CONFIG_DESC, 0x00, // wTotalLength: общий размер всего дерева под данной конфигурацией в байтах
+uint8_t CUBE_ConfigDescriptor[CUBE_SIZ_CONFIG_DESC] = {
+	0x09,							   // bLength: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	USB_CONFIGURATION_DESCRIPTOR_TYPE, // bDescriptorType: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	CUBE_SIZ_CONFIG_DESC, 0x00,		   // wTotalLength: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
 
-		    0x01,         // bNumInterfaces: в конфигурации всего один интерфейс
-		    0x01,         // bConfigurationValue: индекс данной конфигурации
-		    0x00,         // iConfiguration: индекс строки, которая описывает эту конфигурацию
-		    0xE0,         // bmAttributes: признак того, что устройство будет питаться от шины USB
-		    0xFA,         // MaxPower 500 mA
+	0x01, // bNumInterfaces: пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0x01, // bConfigurationValue: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0x00, // iConfiguration: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0xE0, // bmAttributes: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ USB
+	0xFA, // MaxPower 500 mA
 
-				/************** Дескриптор интерфейса ****************/
-				0x09,         // bLength: размер дескриптора интерфейса
-				USB_INTERFACE_DESCRIPTOR_TYPE, // bDescriptorType: тип дескриптора - интерфейс
-				0x00,         // bInterfaceNumber: порядковый номер интерфейса - 0
-				0x00,         // bAlternateSetting: признак альтернативного интерфейса, у нас не используется
-/*----------->*/0x02,         // bNumEndpoints - количество эндпоинтов.
+	/************** пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ****************/
+	0x09,						   // bLength: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	USB_INTERFACE_DESCRIPTOR_TYPE, // bDescriptorType: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0x00,						   // bInterfaceNumber: пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - 0
+	0x00,						   // bAlternateSetting: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅ пїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	/*----------->*/ 0x02,		   // bNumEndpoints - пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
 
-				0x03,         // bInterfaceClass: класс интерфеса - HID
-				// если бы мы косили под стандартное устройство, например клавиатуру или мышь, то надо было бы указать правильно класс и подкласс
-				// а так у нас общее HID-устройство
-				0x00,         // bInterfaceSubClass : подкласс интерфейса.
-				0x00,         // nInterfaceProtocol : протокол интерфейса
+	0x03, // bInterfaceClass: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - HID
+	// пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	// пїЅ пїЅпїЅпїЅ пїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ HID-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	0x00, // bInterfaceSubClass : пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ.
+	0x00, // nInterfaceProtocol : пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-				0,            // iInterface: индекс строки, описывающей интерфейс
+	0, // iInterface: пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
-					// теперь отдельный дескриптор для уточнения того, что данный интерфейс - это HID устройство
-					/******************** HID дескриптор ********************/
-					0x09,         // bLength: длина HID-дескриптора
-					HID_DESCRIPTOR_TYPE, // bDescriptorType: тип дескриптора - HID
-					0x01, 0x01,   // bcdHID: номер версии HID 1.1
-/*--------------->*/0x33,         // bCountryCode: код страны (если нужен)
-/*===============>*/0x01,         // bNumDescriptors: Сколько дальше будет report дескрипторов
-						HID_REPORT_DESCRIPTOR_TYPE,         // bDescriptorType: Тип дескриптора - report
-						CUBE_SIZ_REPORT_DESC,	0x00, // wItemLength: длина report-дескриптора
+	// пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ, пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - пїЅпїЅпїЅ HID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	/******************** HID пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ ********************/
+	0x09,						// bLength: пїЅпїЅпїЅпїЅпїЅ HID-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	HID_DESCRIPTOR_TYPE,		// bDescriptorType: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - HID
+	0x01, 0x01,					// bcdHID: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ HID 1.1
+	/*--------------->*/ 0x33,	// bCountryCode: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ)
+	/*===============>*/ 0x01,	// bNumDescriptors: пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ report пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	HID_REPORT_DESCRIPTOR_TYPE, // bDescriptorType: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - report
+	CUBE_SIZ_REPORT_DESC, 0x00, // wItemLength: пїЅпїЅпїЅпїЅпїЅ report-пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
+	/******************** пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ (endpoints) ********************/
+	0x07,						  // bLength: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+	USB_ENDPOINT_DESCRIPTOR_TYPE, // пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ - endpoints
 
-					/******************** дескриптор конечных точек (endpoints) ********************/
-					0x07,          // bLength: длина дескриптора
-					USB_ENDPOINT_DESCRIPTOR_TYPE, // тип дескриптора - endpoints
+	0x81,						  // bEndpointAddress: пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ 1(IN)
+	0x03,						  // bmAttributes: пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ - Interrupt endpoint
+	wMaxPacketSize, 0x00,		  // wMaxPacketSize:  Bytes max
+	0x20,						  // bInterval: Polling Interval (32 ms)=0x20
+								  /*==^==^==^==^==^==^==^==^==^==^==^==^*/
+	0x07,						  /* bLength: Endpoint Descriptor size */
+	USB_ENDPOINT_DESCRIPTOR_TYPE, /* bDescriptorType: */
+								  /*	Endpoint descriptor type */
+	0x01,						  /* bEndpointAddress: */
+								  /*	Endpoint Address (OUT) */
+	0x03,						  /* bmAttributes: Interrupt endpoint */
+	wMaxPacketSize,				  /* wMaxPacketSize:  Bytes max  */
+	0x00,
+	0x20, /* bInterval: Polling Interval (32 ms) */
+}; /* CUBE_ConfigDescriptor */
 
-					0x81,          // bEndpointAddress: адрес конечной точки и направление 1(IN)
-					0x03,          // bmAttributes: тип конечной точки - Interrupt endpoint
-					wMaxPacketSize, 0x00,    // wMaxPacketSize:  Bytes max
-					0x20,          // bInterval: Polling Interval (32 ms)=0x20
-/*==^==^==^==^==^==^==^==^==^==^==^==^*/
-          0x07,	/* bLength: Endpoint Descriptor size */
-          USB_ENDPOINT_DESCRIPTOR_TYPE,	/* bDescriptorType: */
-            /*	Endpoint descriptor type */
-          0x01,	/* bEndpointAddress: */
-            /*	Endpoint Address (OUT) */
-          0x03,	/* bmAttributes: Interrupt endpoint */
-          wMaxPacketSize,	/* wMaxPacketSize:  Bytes max  */
-          0x00,
-          0x20,	/* bInterval: Polling Interval (32 ms) */
-}
-  ; /* CUBE_ConfigDescriptor */
+uint8_t CUBE_ReportDescriptor[CUBE_SIZ_REPORT_DESC] = {
+	0x06, 0x00, 0xff, // USAGE_PAGE (Generic Desktop)
+	0x09, 0x01,		  // USAGE (Vendor Usage 1)
+	0xa1, 0x01,		  // COLLECTION (Application)
 
-const uint8_t CUBE_ReportDescriptor[CUBE_SIZ_REPORT_DESC] =
-  {
-    0x06, 0x00, 0xff,              // USAGE_PAGE (Generic Desktop)
-    0x09, 0x01,                    // USAGE (Vendor Usage 1)
-    0xa1, 0x01,                    // COLLECTION (Application)
+	// REPORT ID 1 - PC sends first CUBE/2
+	0x85, 0x01,		  // REPORT_ID (1)
+	0x09, 0x01,		  // USAGE (Vendor Usage 1)
+	0x15, 0x00,		  //   LOGICAL_MINIMUM (0)
+	0x26, 0xff, 0x00, //   LOGICAL_MAXIMUM (255)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT1_COUNT, // REPORT_COUNT (N)
+	0xb1, 0x82,		  //   FEATURE (Data,Var,Abs,Vol)
+	0x85, 0x01,		  // REPORT_ID (1)
+	0x09, 0x01,		  // USAGE (Vendor Usage 1)
+	0x91, 0x82,		  //   OUTPUT (Data,Var,Abs,Vol)
 
-//REPORT ID 1 - PC sends first CUBE/2
-0x85, 0x01,                    //REPORT_ID (1)
-0x09, 0x01,                    //USAGE (Vendor Usage 1)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
-0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x95, RPT1_COUNT,                    //REPORT_COUNT (N)
-0xb1, 0x82,                    //   FEATURE (Data,Var,Abs,Vol)
-0x85, 0x01,                    //REPORT_ID (1)
-0x09, 0x01,                    //USAGE (Vendor Usage 1)
-    0x91, 0x82,                    //   OUTPUT (Data,Var,Abs,Vol)
+	// REPORT ID 2 - PC sends second CUBE/2
+	0x85, 0x02,		  // REPORT_ID (2)
+	0x09, 0x02,		  // USAGE (Vendor Usage 2)
+	0x15, 0x00,		  //   LOGICAL_MINIMUM (0)
+	0x26, 0xff, 0x00, //   LOGICAL_MAXIMUM (255)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT2_COUNT, // REPORT_COUNT (N)
+	0xb1, 0x82,		  //   FEATURE (Data,Var,Abs,Vol)
+	0x85, 0x02,		  // REPORT_ID (2)
+	0x09, 0x02,		  // USAGE (Vendor Usage 2)
+	0x91, 0x82,		  //   OUTPUT (Data,Var,Abs,Vol)
 
-//REPORT ID 2 - PC sends second CUBE/2
-0x85, 0x02,                    //REPORT_ID (2)
-0x09, 0x02,                    //USAGE (Vendor Usage 2)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
-0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x95, RPT2_COUNT,                    //REPORT_COUNT (N)
-0xb1, 0x82,                    //   FEATURE (Data,Var,Abs,Vol)
-0x85, 0x02,                    //REPORT_ID (2)
-0x09, 0x02,                    //USAGE (Vendor Usage 2)
-    0x91, 0x82,                    //   OUTPUT (Data,Var,Abs,Vol)
+	// REPORT ID 3 - PC sends ???
+	0x85, 0x03,		  // REPORT_ID (3)
+	0x09, 0x03,		  // USAGE (Vendor Usage 3)
+	0x15, 0x00,		  //   LOGICAL_MINIMUM (0)
+	0x26, 0xff, 0x00, //   LOGICAL_MAXIMUM (255)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT3_COUNT, // REPORT_COUNT (N)
+	0xb1, 0x82,		  //   FEATURE (Data,Var,Abs,Vol)
+	0x85, 0x03,		  // REPORT_ID (3)
+	0x09, 0x03,		  // USAGE (Vendor Usage 3)
+	0x91, 0x82,		  //   OUTPUT (Data,Var,Abs,Vol)
 
-//REPORT ID 3 - PC sends ???
-0x85, 0x03,                    //REPORT_ID (3)
-0x09, 0x03,                    //USAGE (Vendor Usage 3)
-    0x15, 0x00,                    //   LOGICAL_MINIMUM (0)
-    0x26, 0xff, 0x00,              //   LOGICAL_MAXIMUM (255)
-0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x95, RPT3_COUNT,              //REPORT_COUNT (N)
-0xb1, 0x82,                    //   FEATURE (Data,Var,Abs,Vol)
-0x85, 0x03,                    //REPORT_ID (3)
-0x09, 0x03,                    //USAGE (Vendor Usage 3)
-    0x91, 0x82,                    //   OUTPUT (Data,Var,Abs,Vol)
+	// REPORT ID 4 - STM32 sends CUBE/2
+	0x85, 0x04,		  // REPORT_ID (4)
+	0x09, 0x04,		  // USAGE (Vendor Usage 4)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT4_COUNT, // REPORT_COUNT (N)
+	0x81, 0x82,		  //   INPUT (Data,Var,Abs,Vol)
 
+	// REPORT ID 5 - STM32 sends CUBE/2
+	0x85, 0x05,		  // REPORT_ID (5)
+	0x09, 0x05,		  // USAGE (Vendor Usage 5)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT5_COUNT, // REPORT_COUNT (N)
+	0x81, 0x82,		  //   INPUT (Data,Var,Abs,Vol)
 
-//REPORT ID 4 - STM32 sends CUBE/2
-0x85, 0x04,                    //REPORT_ID (4)
-0x09, 0x04,                    //USAGE (Vendor Usage 4)
-    0x75, 0x08,                    //   REPORT_SIZE (8)
-    0x95, RPT4_COUNT,              //REPORT_COUNT (N)
-    0x81, 0x82,                    //   INPUT (Data,Var,Abs,Vol)
+	// REPORT ID 6 - STM32 sends buttons + info
+	0x85, 0x06,		  // REPORT_ID (6)
+	0x09, 0x06,		  // USAGE (Vendor Usage 6)
+	0x75, 0x08,		  //   REPORT_SIZE (8)
+	0x95, RPT6_COUNT, // REPORT_COUNT (N)
+	0x81, 0x82,		  //   INPUT (Data,Var,Abs,Vol)
 
-//REPORT ID 5 - STM32 sends CUBE/2
-0x85, 0x05,                    //REPORT_ID (5)
-0x09, 0x05,                    //USAGE (Vendor Usage 5)
-	0x75, 0x08,                    //   REPORT_SIZE (8)
-	0x95, RPT5_COUNT,              //REPORT_COUNT (N)
-	0x81, 0x82,                    //   INPUT (Data,Var,Abs,Vol)
-
-//REPORT ID 6 - STM32 sends buttons + info
-0x85, 0x06,                    //REPORT_ID (6)
-0x09, 0x06,                    //USAGE (Vendor Usage 6)
-	0x75, 0x08,                    //   REPORT_SIZE (8)
-	0x95, RPT6_COUNT,              //REPORT_COUNT (N)
-	0x81, 0x82,                    //   INPUT (Data,Var,Abs,Vol)
-
-    0xc0                           // END_COLLECTION
-}
-  ; /* CUBE_ReportDescriptor */
+	0xc0 // END_COLLECTION
+}; /* CUBE_ReportDescriptor */
 
 /* USB String Descriptors (optional) */
-const uint8_t CUBE_StringLangID[CUBE_SIZ_STRING_LANGID] =
-  {
-    CUBE_SIZ_STRING_LANGID, /* =4*/
-    USB_STRING_DESCRIPTOR_TYPE,
-    0x09,
-    0x04
-  }
-  ; /* LangID = 0x0409: U.S. English */
+uint8_t CUBE_StringLangID[CUBE_SIZ_STRING_LANGID] = {
+	CUBE_SIZ_STRING_LANGID, /* =4*/
+	USB_STRING_DESCRIPTOR_TYPE,
+	0x09,
+	0x04}; /* LangID = 0x0409: U.S. English */
 
-const uint8_t CUBE_StringVendor[CUBE_SIZ_STRING_VENDOR] =
-  {
-    CUBE_SIZ_STRING_VENDOR, /* Size of Vendor string = 10*/
-    USB_STRING_DESCRIPTOR_TYPE,  /* bDescriptorType*/
-    /* Manufacturer: "STMicroelectronics" */
-    'E', 0, '.', 0, 'D', 0, '.', 0
-  };
+uint8_t CUBE_StringVendor[CUBE_SIZ_STRING_VENDOR] = {
+	CUBE_SIZ_STRING_VENDOR,		/* Size of Vendor string = 10*/
+	USB_STRING_DESCRIPTOR_TYPE, /* bDescriptorType*/
+	/* Manufacturer: "STMicroelectronics" */
+	'E', 0, '.', 0, 'D', 0, '.', 0};
 
-const uint8_t CUBE_StringProduct[CUBE_SIZ_STRING_PRODUCT] =
-  {
-    CUBE_SIZ_STRING_PRODUCT,          /* bLength = 22*/
-    USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
-    'C', 0, 'U', 0, 'B', 0, 'E', 0, ' ', 0, 'S', 0, 'T', 0,
-    'M', 0, '3', 0, '2', 0
-  };
-uint8_t CUBE_StringSerial[CUBE_SIZ_STRING_SERIAL] =
-  {
-    CUBE_SIZ_STRING_SERIAL,           /* bLength = 26 */
-    USB_STRING_DESCRIPTOR_TYPE,        /* bDescriptorType */
-    'U', 0, 'S', 0, 'B', 0, ' ', 0, 'C', 0, 'U', 0, 'B', 0, 'E'
-  };
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
-
+uint8_t CUBE_StringProduct[CUBE_SIZ_STRING_PRODUCT] = {
+	CUBE_SIZ_STRING_PRODUCT,	/* bLength = 22*/
+	USB_STRING_DESCRIPTOR_TYPE, /* bDescriptorType */
+	'C', 0, 'U', 0, 'B', 0, 'E', 0, ' ', 0, 'S', 0, 'T', 0,
+	'M', 0, '3', 0, '2', 0};
+uint8_t CUBE_StringSerial[CUBE_SIZ_STRING_SERIAL] = {
+	CUBE_SIZ_STRING_SERIAL,		/* bLength = 26 */
+	USB_STRING_DESCRIPTOR_TYPE, /* bDescriptorType */
+	'U', 0, 'S', 0, 'B', 0, ' ', 0, 'C', 0, 'U', 0, 'B', 0, 'E'};

@@ -1,46 +1,44 @@
-/* Includes ------------------------------------------------------------------*/
-#include "stm32f10x_it.h"
-
-#include "usb_lib.h"
-#include "usb_prop.h"
-#include "usb_desc.h"
 #include "hw_config.h"
-#include "usb_pwr.h"
 #include "debug.h"
 #include "random.h"
+#include "stm32f10x_it.h"
+#include "usb_desc.h"
+#include "usb_lib.h"
+#include "usb_prop.h"
+#include "usb_pwr.h"
 
-
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
 uint16_t btn1_prev, btn2_prev;
 uint8_t Buffer[70];
 
-
-/* Extern variables ----------------------------------------------------------*/
 extern uint8_t image[64];
 extern uint8_t Matrix[7];
 extern uint8_t buttons;
 extern uint8_t buttonsState;
 
-/* Private function prototypes -----------------------------------------------*/
-static void IntToUnicode (uint32_t value , uint8_t *pbuf , uint8_t len);
-extern void assert_failed(const char* file, uint32_t line);
-
-
-/* Private functions ---------------------------------------------------------*/
-/*******************************************************************************
-* Function Name  : Initialization.
-* Description    : Initialize the chip peripheral.
-*******************************************************************************/
-void Initialization()
+static void IntToUnicode(uint32_t value, uint8_t *pbuf, uint8_t len)
 {
-//RCC Init
+	for(uint8_t idx = 0; idx < len; idx++)
+	{
+		if(((value >> 28)) < 0xA)
+		{
+			pbuf[2 * idx] = (value >> 28) + '0';
+		}
+		else
+		{
+			pbuf[2 * idx] = (value >> 28) + 'A' - 10;
+		}
+		value = value << 4;
+		pbuf[2 * idx + 1] = 0;
+	}
+}
+
+void hw_init(void)
+{
+	// RCC Init
 	RCC_DeInit();
 	RCC_HSEConfig(RCC_HSE_ON);
 	ErrorStatus HSEStartUpStatus = RCC_WaitForHSEStartUp();
-	if (HSEStartUpStatus == SUCCESS)
+	if(HSEStartUpStatus == SUCCESS)
 	{
 		// Enable Prefetch Buffer
 		FLASH_PrefetchBufferCmd(FLASH_PrefetchBuffer_Enable);
@@ -56,46 +54,46 @@ void Initialization()
 		// ADC Clock
 		RCC_ADCCLKConfig(RCC_PCLK2_Div8);
 		// PLL Clock
-		RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9);//9
+		RCC_PLLConfig(RCC_PLLSource_HSE_Div1, RCC_PLLMul_9); // 9
 
 		RCC_PLLCmd(ENABLE);
-		while (RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
+		while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET)
+			;
 
 		RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
-		while (RCC_GetSYSCLKSource() != 0x08);
+		while(RCC_GetSYSCLKSource() != 0x08)
+			;
 	}
 
-//System Clock = (72Mhz) / 72000 = 1000Hz = 1ms reload
+	// System Clock = (72Mhz) / 72000 = 1000Hz = 1ms reload
 	SysTick_Config(72000);
 
-//Peripheral clocking
-	RCC_APB2PeriphClockCmd( RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_SPI1 |
-			RCC_APB2Periph_USART1 | RCC_APB2Periph_ADC1 |RCC_APB2Periph_AFIO, ENABLE );
+	// Peripheral clocking
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOA | RCC_APB2Periph_GPIOB | RCC_APB2Periph_SPI1 | RCC_APB2Periph_USART1 | RCC_APB2Periph_ADC1 | RCC_APB2Periph_AFIO, ENABLE);
 	RCC_AHBPeriphClockCmd(RCC_AHBPeriph_DMA1, ENABLE);
 
 	AFIO->MAPR |= AFIO_MAPR_SWJ_CFG_JTAGDISABLE;
 
-//I/O
+	// I/O
 	GPIO_InitTypeDef GPIO_InitStructure;
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_All;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOB, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 |
-								GPIO_Pin_6 | GPIO_Pin_8 | GPIO_Pin_15 | GPIO_Pin_5 | GPIO_Pin_7;
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_6 | GPIO_Pin_8 | GPIO_Pin_15 | GPIO_Pin_5 | GPIO_Pin_7;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-//SPI Pins
+// SPI Pins
 #ifdef USE_DMA
 	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_7;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
 	GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-//SPI Init
+	// SPI Init
 	SPI_I2S_DeInit(SPI1);
 	SPI_InitTypeDef SPI_InitStructure;
 	SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
@@ -109,7 +107,7 @@ void Initialization()
 	SPI_Init(SPI1, &SPI_InitStructure);
 	SPI_I2S_DMACmd(SPI1, SPI_I2S_DMAReq_Tx, ENABLE);
 
-//DMA Init
+	// DMA Init
 	DMA_DeInit(DMA1_Channel3);
 	DMA_InitTypeDef DMA_InitStructure;
 	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)&SPI1->DR;
@@ -125,11 +123,11 @@ void Initialization()
 	DMA_InitStructure.DMA_M2M = DMA_M2M_Disable;
 	DMA_Init(DMA1_Channel3, &DMA_InitStructure);
 
-	//DMA_Cmd(DMA1_Channel3, ENABLE);
+	// DMA_Cmd(DMA1_Channel3, ENABLE);
 	SPI_Cmd(SPI1, ENABLE);
 #endif
 
-//Timer
+	// Timer
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
 	NVIC_InitTypeDef NVIC_InitStructure;
@@ -152,22 +150,24 @@ void Initialization()
 	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 	TIM_ClearFlag(TIM2, TIM_FLAG_Update);
 
-//USB Init
-	Set_System();
-	Set_USBClock();
-	USB_Interrupts_Config();
+	// USB Init
+	RCC_USBCLKConfig(RCC_USBCLKSource_PLLCLK_1Div5);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, ENABLE);
+
+	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
+
+	NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
 	USB_Init();
 
 	DebugInit();
 	RandomInit();
 }
 
-
-/*******************************************************************************
-* Function Name : CUBECheckState.
-* Description   : Decodes the CUBE state.
-* Return value  : The state value.
-*******************************************************************************/
 void CUBECheckState(void)
 {
 	static uint8_t packetType = 4;
@@ -178,174 +178,90 @@ void CUBECheckState(void)
 	case 4:
 		packetType = 5;
 		Buffer[0] = 4;
-		for(uint8_t i=0; i<32; i++) {Buffer[i+1] = image[i];}
-		USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT+1);
+		for(uint8_t i = 0; i < 32; i++)
+		{
+			Buffer[i + 1] = image[i];
+		}
+		USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT + 1);
 		break;
 	case 5:
 		packetType = 6;
 		Buffer[0] = 5;
-		for(uint8_t i=0; i<32; i++) {Buffer[i+1] = image[i+32];}
-		USB_SIL_Write(EP1_IN, Buffer, RPT5_COUNT+1);
+		for(uint8_t i = 0; i < 32; i++)
+		{
+			Buffer[i + 1] = image[i + 32];
+		}
+		USB_SIL_Write(EP1_IN, Buffer, RPT5_COUNT + 1);
 		break;
 	case 6:
 		packetType = 4;
 		Buffer[0] = 6;
 		Buffer[1] = buttonsState;
 		Buffer[2] = Buffer[3] = 0;
-		USB_SIL_Write(EP1_IN, Buffer, RPT6_COUNT+1);
+		USB_SIL_Write(EP1_IN, Buffer, RPT6_COUNT + 1);
 		break;
+	default: break;
 	}
-
 
 #else
 	Buffer[0] = 4;
-	for(uint8_t i=0; i<32; i++)
+	for(uint8_t i = 0; i < 32; i++)
 	{
-		if(i<15)	Buffer[i+1] = 0;
-		else Buffer[i+1] = 255;
+		if(i < 15)
+			Buffer[i + 1] = 0;
+		else
+			Buffer[i + 1] = 255;
 	}
-			USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT+1);
+	USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT + 1);
 #endif
-   /* Buffer[0] = 4;//4;
-    Buffer[1] = 255;//btn1;
-    Buffer[2] = 13;//btn2;
-    Buffer[3] = 150;//Matrix[0];
-    Buffer[4] = 49;
-    Buffer[5] = 48;
-    for(uint8_t i = 1; i<64; i++) Buffer[i] = i;*/
+	/* Buffer[0] = 4;//4;
+	 Buffer[1] = 255;//btn1;
+	 Buffer[2] = 13;//btn2;
+	 Buffer[3] = 150;//Matrix[0];
+	 Buffer[4] = 49;
+	 Buffer[5] = 48;
+	 for(uint8_t i = 1; i<64; i++) Buffer[i] = i;*/
 
-    //for(uint8_t k=0; k<5; k++)Buffer[k] = k+10;
+	// for(uint8_t k=0; k<5; k++)Buffer[k] = k+10;
 
-
-	//USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT+1); /* Copy mouse position info in ENDP1 Tx Packet Memory Area*/
-	SetEPTxValid(ENDP1);	/* Enable endpoint for transmission */
-
+	// USB_SIL_Write(EP1_IN, Buffer, RPT4_COUNT+1); /* Copy mouse position info in ENDP1 Tx Packet Memory Area*/
+	SetEPTxValid(ENDP1); /* Enable endpoint for transmission */
 }
 
 void CUBECheckState2(void)
 {
-	uint8_t buff[21] = {05,56,57,58,100,101,102};
-
-	/* Copy mouse position info in ENDP1 Tx Packet Memory Area*/
-	USB_SIL_Write(EP1_IN, buff, 32+1);
-	/* Enable endpoint for transmission */
+	uint8_t buff[21] = {05, 56, 57, 58, 100, 101, 102};
+	USB_SIL_Write(EP1_IN, buff, 32 + 1);
 	SetEPTxValid(ENDP1);
-
 }
 
-/*******************************************************************************
- * Description    : Configures Main system clocks & power
- *******************************************************************************/
-void Set_System(void){}
-
-
-/*******************************************************************************
- * Description    : Configures USB Clock input (48MHz)
- *******************************************************************************/
-void Set_USBClock(void)
-{
-	/* Select USBCLK source */
-	RCC_USBCLKConfig(RCC_USBCLKSource_PLLCLK_1Div5);
-
-	/* Enable the USB clock */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_USB, ENABLE);
-}
-
-
-/*******************************************************************************
- * Description    : Power-off system clocks and power while entering suspend mode
- *******************************************************************************/
 void Enter_LowPowerMode(void)
 {
 	/* Set the device state to suspend */
 	bDeviceState = SUSPENDED;
 }
 
-
-/*******************************************************************************
- * Description    : Restores system clocks and power while exiting suspend mode
- *******************************************************************************/
 void Leave_LowPowerMode(void)
 {
 	DEVICE_INFO *pInfo = &Device_Info;
-
-	/* Set the device state to the correct state */
-	if (pInfo->Current_Configuration != 0)
-	{
-		/* Device configured */
-		bDeviceState = CONFIGURED;
-	}
-	else
-	{
-		bDeviceState = ATTACHED;
-	}
+	bDeviceState = pInfo->Current_Configuration != 0 ? CONFIGURED : ATTACHED;
 }
 
+void USB_Cable_Config(FunctionalState NewState) {}
 
-/*******************************************************************************
- * Description    : Configures the USB interrupts
- *******************************************************************************/
-void USB_Interrupts_Config(void)
-{
-	NVIC_InitTypeDef NVIC_InitStructure;
-
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
-
-	NVIC_InitStructure.NVIC_IRQChannel = USB_LP_CAN1_RX0_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 1;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-}
-
-
-/*******************************************************************************
- * Description    : Software Connection/Disconnection of USB Cable
- *******************************************************************************/
-void USB_Cable_Config(FunctionalState NewState){}
-
-
-/*******************************************************************************
- * Description    : Create the serial number string descriptor.
- *******************************************************************************/
 void Get_SerialNum(void)
 {
 	uint32_t Device_Serial0, Device_Serial1, Device_Serial2;
 
-	Device_Serial0 = *(volatile uint32_t*) (0x1FFFF7E8);
-	Device_Serial1 = *(volatile uint32_t*) (0x1FFFF7EC);
-	Device_Serial2 = *(volatile uint32_t*) (0x1FFFF7F0);
+	Device_Serial0 = *(volatile uint32_t *)(0x1FFFF7E8);
+	Device_Serial1 = *(volatile uint32_t *)(0x1FFFF7EC);
+	Device_Serial2 = *(volatile uint32_t *)(0x1FFFF7F0);
 
 	Device_Serial0 += Device_Serial2;
 
-	if (Device_Serial0 != 0)
+	if(Device_Serial0 != 0)
 	{
 		IntToUnicode(Device_Serial0, &CUBE_StringSerial[2], 8);
 		IntToUnicode(Device_Serial1, &CUBE_StringSerial[18], 4);
-	}
-}
-
-
-/*******************************************************************************
- * Description    : Convert Hex 32Bits value into char.
- *******************************************************************************/
-static void IntToUnicode(uint32_t value, uint8_t *pbuf, uint8_t len)
-{
-	uint8_t idx = 0;
-
-	for (idx = 0; idx < len; idx++)
-	{
-		if (((value >> 28)) < 0xA)
-		{
-			pbuf[2 * idx] = (value >> 28) + '0';
-		}
-		else
-		{
-			pbuf[2 * idx] = (value >> 28) + 'A' - 10;
-		}
-
-		value = value << 4;
-
-		pbuf[2 * idx + 1] = 0;
 	}
 }

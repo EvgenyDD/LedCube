@@ -1,60 +1,51 @@
-/* Includes ------------------------------------------------------------------*/
-//#include "stm32f10x.h"
 #include "modes.h"
 #include "debug.h"
-#include "string.h"
-//#include "math.h"
-#include "debug.h"
 #include "hw_config.h"
+#include "string.h"
 #include <stdbool.h>
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
 #define TIMING 200
 
-#define SNAKE_DELAY 120 //lesser - bigger frequency
+#define SNAKE_DELAY 120 // lesser - bigger frequency
 #define SNAKE_MAX_LEN 16
 #define SNAKE_MIN_LEN 1
 #define SNAKE_SHOW_TARGET
 
-#if SNAKE_MIN_LEN<1 || SNAKE_MIN_LEN > SNAKE_MAX_LEN || SNAKE_MAX_LEN>16
+#if SNAKE_MIN_LEN < 1 || SNAKE_MIN_LEN > SNAKE_MAX_LEN || SNAKE_MAX_LEN > 16
 #error Invalid SNAKE_MIN_LEN or SNAKE_MAX_LEN
 #endif
 
 enum VoxelMove
 {
-	EQUAL, DECREASE, INCREASE
+	EQUAL,
+	DECREASE,
+	INCREASE
 };
 
-const uint8_t bitmaps[6][8] =
-{
-{ 0xc3, 0xc3, 0x00, 0x18, 0x18, 0x81, 0xff, 0x7e }, // Smile (small)
-		{ 0x3c, 0x42, 0x81, 0x81, 0xc3, 0x24, 0xa5, 0xe7 }, // Omega
-		{ 0x00, 0x04, 0x06, 0xff, 0xff, 0x06, 0x04, 0x00 }, // Arrow
-		{ 0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42, 0x81 }, // X
-
-		};
-
-const uint16_t sinTable[91] =
-{ 0, 18, 36, 54, 71, 89, 107, 125, 143, 160, 178, 195, 213, 230, 248, 265, 282,
-		299, 316, 333, 350, 367, 384, 400, 416, 433, 449, 465, 481, 496, 512,
-		527, 543, 558, 573, 587, 602, 616, 630, 644, 658, 672, 685, 698, 711,
-		724, 737, 749, 761, 773, 784, 796, 807, 818, 828, 839, 849, 859, 868,
-		878, 887, 896, 904, 912, 920, 928, 935, 943, 949, 956, 962, 968, 974,
-		979, 984, 989, 994, 998, 1002, 1005, 1008, 1011, 1014, 1016, 1018, 1020,
-		1022, 1023, 1023, 1024, 1024
+const uint8_t bitmaps[6][8] = {
+	{0xc3, 0xc3, 0x00, 0x18, 0x18, 0x81, 0xff, 0x7e}, // Smile (small)
+	{0x3c, 0x42, 0x81, 0x81, 0xc3, 0x24, 0xa5, 0xe7}, // Omega
+	{0x00, 0x04, 0x06, 0xff, 0xff, 0x06, 0x04, 0x00}, // Arrow
+	{0x81, 0x42, 0x24, 0x18, 0x18, 0x24, 0x42, 0x81}, // X
 
 };
 
-/* Private macro -------------------------------------------------------------*/
-#define abs(x)  ( x<0 ) ? -x : x
+const uint16_t sinTable[91] = {
+	0, 18, 36, 54, 71, 89, 107, 125, 143, 160, 178, 195, 213, 230, 248, 265, 282,
+	299, 316, 333, 350, 367, 384, 400, 416, 433, 449, 465, 481, 496, 512,
+	527, 543, 558, 573, 587, 602, 616, 630, 644, 658, 672, 685, 698, 711,
+	724, 737, 749, 761, 773, 784, 796, 807, 818, 828, 839, 849, 859, 868,
+	878, 887, 896, 904, 912, 920, 928, 935, 943, 949, 956, 962, 968, 974,
+	979, 984, 989, 994, 998, 1002, 1005, 1008, 1011, 1014, 1016, 1018, 1020,
+	1022, 1023, 1023, 1024, 1024};
 
-/* Private variables ---------------------------------------------------------*/
-char *pString;
+#define abs(x) (x < 0) ? -x : x
+
+const char *pString;
 uint16_t cubeStrPos = 0;
 uint8_t stringMode = 0;
 
-//snake
+// snake
 struct SnakeType
 {
 	uint8_t voxel[3];
@@ -68,8 +59,6 @@ uint8_t rainDir = DOWN, rainAxis = Z;
 
 uint16_t iterations;
 
-/* Extern variables ----------------------------------------------------------*/
-//extern uint8_t Matrix[7];
 extern uint8_t image[64];
 extern bool flagCubeShift;
 extern uint16_t modesCounter;
@@ -82,17 +71,13 @@ extern uint8_t Matrix[7];
 
 extern uint8_t USBmode;
 
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
 /*******************************************************************************
  * Function Name  : ModesDelay
- * Description    : delay code execution
+ delay code execution
  *******************************************************************************/
 void ModesDelay(uint16_t delay)
 {
-	if(USBmode == PC_CONTROLS)
-		return;
-	//return;
+	if(USBmode == PC_CONTROLS) return;
 	modesCounter = delay;
 	while(modesCounter)
 		;
@@ -100,22 +85,20 @@ void ModesDelay(uint16_t delay)
 
 /*******************************************************************************
  * Function Name  : RandomPixel
- * Description    : Draws random pixel without accumulation
+ Draws random pixel without accumulation
  *******************************************************************************/
-void RandomPixel()
+void RandomPixel(void)
 {
 	for(iterations = 0; iterations < 70; iterations++)
 	{
 		CubeReset();
 		CubeSetVoxel(GetRandom() % 8, GetRandom() % 8, GetRandom() % 8);
-
 		ModesDelay(50);
 	}
 }
 
 /*******************************************************************************
  * Function Name  : RandomPixelAccumulate
- * Description    :
  *******************************************************************************/
 void RandomPixelAccumulate()
 {
@@ -134,12 +117,10 @@ void RandomPixelAccumulate()
 			for(uint16_t i = 0; i < 512; i++)
 			{
 				uint8_t x[4];
-				for(uint8_t i = 0; i < 4; i++)
-					x[i] = GetRandom();
+				for(uint8_t j = 0; j < 4; j++)
+					x[j] = GetRandom();
 
-				uint16_t j = i
-						+ (x[0] * 1000 + x[1] * 100 + x[2] * 10 + x[3])
-								/ (9999 / (512 - i) + 1);
+				uint16_t j = i + (x[0] * 1000 + x[1] * 100 + x[2] * 10 + x[3]) / (9999 / (512 - i) + 1);
 				j = j % 512;
 				uint16_t t = massR[j];
 				massR[j] = massR[i];
@@ -151,44 +132,35 @@ void RandomPixelAccumulate()
 		else
 			accFlag++;
 
-		CubeSetVoxel(massR[accFlag] / 64, massR[accFlag] / 8 % 8,
-				massR[accFlag] % 8);
+		CubeSetVoxel(massR[accFlag] / 64, massR[accFlag] / 8 % 8, massR[accFlag] % 8);
 
 #define START_SPEED 50
 #define END_SPEED 1
 
-		ModesDelay(
-				START_SPEED - (accFlag / (512 / (START_SPEED - END_SPEED)))
-						+ 1);
+		ModesDelay(START_SPEED - (accFlag / (512 / (START_SPEED - END_SPEED))) + 1);
 	}
 }
 
 /*******************************************************************************
  * Function Name  : RandomInvert
- * Description    :
  *******************************************************************************/
-void RandomInvert()
+void RandomInvert(void)
 {
 	for(iterations = 0; iterations < 8 * 1000 / 15; iterations++)
 	{
 		uint8_t x = GetRandom() % 8, y = GetRandom() % 8, z = GetRandom() % 8;
-
-		(CubeGetVoxel(x, y, z) == 1) ?
-				CubeResetVoxel(x, y, z) : CubeSetVoxel(x, y, z);
-
+		(CubeGetVoxel(x, y, z) == 1) ? CubeResetVoxel(x, y, z) : CubeSetVoxel(x, y, z);
 		ModesDelay(25);
 	}
 }
 
 /*******************************************************************************
  * Function Name  : OutlineBox
- * Description    :
  *******************************************************************************/
-void OutlineBox()
+void OutlineBox(void)
 {
 	for(iterations = 0; iterations < 2; iterations++)
 	{
-
 #if 0
 #define OUTLINE_MODE 1
 #else
@@ -196,7 +168,7 @@ void OutlineBox()
 		OUTLINE_MODE++;
 #endif
 
-//000->777
+		// 000->777
 		for(uint8_t i = 0; i < 8; i++)
 		{
 			CubeReset();
@@ -210,7 +182,7 @@ void OutlineBox()
 			Outline(7, 7, 7, i, i, i, OUTLINE_MODE % 2);
 			ModesDelay(140);
 		}
-//700->077
+		// 700->077
 		for(uint8_t i = 0; i < 8; i++)
 		{
 			CubeReset();
@@ -224,7 +196,7 @@ void OutlineBox()
 			Outline(0, 7, 7, 7 - i, i, i, OUTLINE_MODE % 2);
 			ModesDelay(140);
 		}
-//from center to outside
+		// from center to outside
 		for(uint8_t i = 0; i < 4; i++)
 		{
 			CubeReset();
@@ -243,24 +215,23 @@ void OutlineBox()
 
 /*******************************************************************************
  * Function Name  : OutlineRandomBoxes
- * Description    :
  *******************************************************************************/
-void OutlineRandomBoxes()
+void OutlineRandomBoxes(void)
 {
 	for(iterations = 0; iterations < 100; iterations++)
 	{
 		static uint8_t flagReached = 0x3F;
-		static uint8_t target[6], cur[6];
+		static uint8_t tgt[6], cur[6];
 
-		if(flagReached == 0x3F) //all 6 bits set to 1
+		if(flagReached == 0x3F) // all 6 bits set to 1
 		{
 			for(uint8_t i = 0; i < 3; i++)
 			{
-				target[i] = target[i + 3] = 0;
-				while(abs(target[i] - target[i+3]) < 3)
+				tgt[i] = tgt[i + 3] = 0;
+				while(abs(tgt[i] - tgt[i + 3]) < 3)
 				{
-					target[i] = GetRandom() % 8;
-					target[i + 3] = GetRandom() % 8;
+					tgt[i] = GetRandom() % 8;
+					tgt[i + 3] = GetRandom() % 8;
 				}
 			}
 
@@ -272,9 +243,9 @@ void OutlineRandomBoxes()
 		{
 			if(BitIsReset(flagReached, i))
 			{
-				if(cur[i] < target[i])
+				if(cur[i] < tgt[i])
 					cur[i]++;
-				else if(cur[i] > target[i])
+				else if(cur[i] > tgt[i])
 					cur[i]--;
 				else
 					BitSet(flagReached, i);
@@ -290,10 +261,8 @@ void OutlineRandomBoxes()
 
 /*******************************************************************************
  * Function Name  : Outline
- * Description    :
  *******************************************************************************/
-void Outline(uint8_t x1, uint8_t y1, uint8_t z1, uint8_t x2, uint8_t y2,
-		uint8_t z2, uint8_t outlineMode)
+void Outline(uint8_t x1, uint8_t y1, uint8_t z1, uint8_t x2, uint8_t y2, uint8_t z2, uint8_t outlineMode)
 {
 	uint8_t origX = x2, origY = y2, origZ = z2;
 	signed char xflg = 0, yflg = 0, zflg = 0;
@@ -332,42 +301,43 @@ void Outline(uint8_t x1, uint8_t y1, uint8_t z1, uint8_t x2, uint8_t y2,
 	}
 
 	for(uint8_t z = z1; z != z2; z += zflg)
+	{
 		for(uint8_t y = y1; y != y2; y += yflg)
+		{
 			for(uint8_t x = x1; x != x2; x += xflg)
 			{
 				if(!outlineMode)
 				{
 					/* only outline */
-					if(((x == x1 || x == origX) && (y == y1 || y == origY))
-							|| ((x == x1 || x == origX)
-									&& (z == z1 || z == origZ))
-							|| ((y == y1 || y == origY)
-									&& (z == z1 || z == origZ)))
+					if(((x == x1 || x == origX) && (y == y1 || y == origY)) ||
+					   ((x == x1 || x == origX) && (z == z1 || z == origZ)) ||
+					   ((y == y1 || y == origY) && (z == z1 || z == origZ)))
 						CubeSetVoxel(x, y, z);
 				}
 				else
-					/* full volume */
+				{ /* full volume */
 					CubeSetVoxel(x, y, z);
+				}
 			}
+		}
+	}
 }
 
 /*******************************************************************************
  * Function Name  : RandMidwayDest
- * Description    :
  *******************************************************************************/
-void RandMidwayDest()
+void RandMidwayDest(void)
 {
 	for(iterations = 0; iterations < 10; iterations++)
 	{
 #define SMALL_DELAY 100
-#define LONG_DELAY 	500
+#define LONG_DELAY 500
 
 		uint8_t invert = 0, axis;
 		invert = GetRandom();
 		axis = GetRandom() % 3;
 
-		uint8_t position[64] =
-		{ 0 }, destination[64];
+		uint8_t position[64] = {0}, destination[64];
 
 		for(uint8_t i = 0; i < 64; i++)
 			destination[i] = GetRandom() % 8;
@@ -387,12 +357,7 @@ void RandMidwayDest()
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void RandMidwayDest_Draw(uint8_t axis, uint8_t position[64],
-		uint8_t destination[64], uint8_t invert)
+void RandMidwayDest_Draw(uint8_t axis, uint8_t position[64], uint8_t destination[64], uint8_t invert)
 {
 	for(uint8_t i = 0; i < 8; i++)
 	{
@@ -411,7 +376,6 @@ void RandMidwayDest_Draw(uint8_t axis, uint8_t position[64],
 			for(uint8_t y = 0; y < 8; y++)
 			{
 				int p;
-
 				if(invert)
 					p = (7 - position[(x * 8) + y]);
 				else
@@ -432,48 +396,40 @@ void RandMidwayDest_Draw(uint8_t axis, uint8_t position[64],
 
 /*******************************************************************************
  * Function Name  : Ripples
- * Description    :
  *******************************************************************************/
-void Ripples()
+void Ripples(void)
 {
 	for(signed int i = 0; i <= 32; i++)
 	{
 		CubeReset();
 
-		for(uint8_t x = 0; x < 8; x++) //2ms
+		for(uint8_t x = 0; x < 8; x++) // 2ms
 		{
 			for(uint8_t y = 0; y < 8; y++)
 			{
-				uint8_t height = (uint8_t)(
-						4
-								+ sin_(
-										Distance2D(3.5, 3.5, x, y) * 35
-												+ (i - 16) * 33) * 3.5);
+				uint8_t height = (uint8_t)(4 + sin_(Distance2D(3.5, 3.5, x, y) * 35 + (i - 16) * 33) * 3.5);
 				CubeSetVoxel(x, y, height);
 			}
 		}
-		ModesDelay(120); //120
+		ModesDelay(120); // 120
 	}
 }
 
 /*******************************************************************************
  * Function Name  : Distance2D
- * Description    :
  *******************************************************************************/
 float Distance2D(float x1, float y1, float x2, float y2)
 {
-	return (float) sqrt_((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+	return (float)sqrt_((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
 }
 
 /*******************************************************************************
  * Function Name  : Distance3D
- * Description    :
  *******************************************************************************/
 float Distance3D(float x1, float y1, float z1, float x2, float y2, float z2)
 {
 	return sqrt_(
-			(x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)
-					+ (z1 - z2) * (z1 - z2));
+		(x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2) + (z1 - z2) * (z1 - z2));
 }
 
 #if 0
@@ -502,14 +458,9 @@ float sinReal(float x)
 }
 #endif
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float sin_(float x)
 {
 	float sign = 1, sine;
-
 	if(x < 0)
 	{
 		while(x < 0)
@@ -528,17 +479,13 @@ float sin_(float x)
 	}
 
 	if(x < 90)
-		sine = sinTable[(uint16_t) x];
+		sine = sinTable[(uint16_t)x];
 	else
 		sine = sinTable[(uint16_t)(180 - x)];
 
 	return sign * sine / 1024;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float cos_(float x)
 {
 	x -= 90;
@@ -562,54 +509,34 @@ float cos_(float x)
 	}
 
 	if(x < 90)
-		sine = sinTable[(uint16_t) x];
+		sine = sinTable[(uint16_t)x];
 	else
 		sine = sinTable[(uint16_t)(180 - x)];
 
 	return -sign * sine / 1024;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float tan_(float x)
 {
 	return sin_(x) / cos_(x);
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float factorial(double x)
 {
 	double result = 1;
-
 	for(int i = 1; i <= x; i++)
 		result *= i;
-
 	return result;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float pow_(float x, float y)
 {
 	double result = 1;
-
 	for(int i = 0; i < y; i++)
 		result *= x;
-
 	return result;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 float sqrt_(float x)
 {
 	union
@@ -617,32 +544,24 @@ float sqrt_(float x)
 		int i;
 		float x;
 	} u;
-
 	u.x = x;
 	u.i = (1 << 29) + (u.i >> 1) - (1 << 22);
 	return u.x;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void SideWaves() //wave from one side to another is rotating
+void SideWaves() // wave from one side to another is rotating
 {
 	for(uint16_t i = 0; i < 184; i++)
 	{
 		CubeReset();
-
-		for(uint8_t x = 0; x < 8; x++) //2ms
+		for(uint8_t x = 0; x < 8; x++) // 2ms
 		{
 			for(uint8_t y = 0; y < 8; y++)
 			{
-				float distance = Distance2D(3.5 + sin_(i * 2) * 4,
-						3.5 + cos_(i * 2) * 4, x, y);
+				float distance = Distance2D(3.5 + sin_(i * 2) * 4, 3.5 + cos_(i * 2) * 4, x, y);
 
-				uint8_t height = (uint8_t)(
-						4 + sin_(distance * 35 + (i - 16) * 33) * 3.5);
-				CubeSetVoxel(x, y, (int) height);
+				uint8_t height = (uint8_t)(4 + sin_(distance * 35 + (i - 16) * 33) * 3.5);
+				CubeSetVoxel(x, y, (int)height);
 			}
 		}
 
@@ -652,31 +571,28 @@ void SideWaves() //wave from one side to another is rotating
 
 /*******************************************************************************
  * Function Name  : OutlineRandomBoxes
- * Description    :
  *******************************************************************************/
-void SineLines()
+void SineLines(void)
 {
-	int i, x;
-
 	float left, right, sine_base, x_dividor, ripple_height;
 
-	for(i = 0; i < 1000; i++)
+	for(int i = 0; i < 1000; i++)
 	{
-		for(x = 0; x < 8; x++)
+		for(int x = 0; x < 8; x++)
 		{
-			x_dividor = 2 + sin_((float) i / 100 * 57.29) + 1;
-			ripple_height = 3 + (sin_((float) i / 200 * 57.29) + 1) * 6;
+			x_dividor = 2 + sin_((float)i / 100 * 57.29) + 1;
+			ripple_height = 3 + (sin_((float)i / 200 * 57.29) + 1) * 6;
 
-			sine_base = (float) i / 40 + (float) x / x_dividor;
+			sine_base = (float)i / 40 + (float)x / x_dividor;
 
 			left = 4 + sin_(sine_base * 57.29) * ripple_height;
 			right = 4 + cos_(sine_base * 57.29) * ripple_height;
 			right = 7 - left;
 
-			//printf("%i %i \n", (int) left, (int) right);
+			// printf("%i %i \n", (int) left, (int) right);
 
-			line_3d(0 - 3, x, (int) left, 7 + 3, x, (int) right);
-			//line_3d((int) right, 7, x);
+			line_3d(0 - 3, x, (int)left, 7 + 3, x, (int)right);
+			// line_3d((int) right, 7, x);
 		}
 
 		ModesDelay(10);
@@ -686,9 +602,8 @@ void SineLines()
 
 /*******************************************************************************
  * Function Name  : SphereMove
- * Description    :
  *******************************************************************************/
-void SphereMove()
+void SphereMove(void)
 {
 	CubeReset();
 
@@ -704,11 +619,11 @@ void SphereMove()
 
 	for(i = 0; i < 1500; i++)
 	{
-		origin_x = 3.5 + sin_((float) i / 50 * 57.29) * 2.5;
-		origin_y = 3.5 + cos_((float) i / 50 * 57.29) * 2.5;
-		origin_z = 3.5 + cos_((float) i / 30 * 57.29) * 2;
+		origin_x = 3.5 + sin_((float)i / 50 * 57.29) * 2.5;
+		origin_y = 3.5 + cos_((float)i / 50 * 57.29) * 2.5;
+		origin_z = 3.5 + cos_((float)i / 30 * 57.29) * 2;
 
-		diameter = 2 + sin_((float) i / 150 * 57.29);
+		diameter = 2 + sin_((float)i / 150 * 57.29);
 
 		for(x = 0; x < 8; x++)
 		{
@@ -717,7 +632,7 @@ void SphereMove()
 				for(z = 0; z < 8; z++)
 				{
 					distance = Distance3D(x, y, z, origin_x, origin_y,
-							origin_z);
+										  origin_z);
 
 					if(distance > diameter && distance < diameter + 1)
 					{
@@ -734,7 +649,6 @@ void SphereMove()
 
 /*******************************************************************************
  * Function Name  : Stairs
- * Description    :
  *******************************************************************************/
 void Stairs()
 {
@@ -752,10 +666,10 @@ void Stairs()
 
 		for(uint8_t y = 0; y <= x; y++)
 		{
-			//uint8_t yy;
+			// uint8_t yy;
 			if(xx)
 				xx--;
-			//if(xx>=16) xx=15;
+			// if(xx>=16) xx=15;
 
 			/*if(invert) yy=15-y;
 			 else yy=y;*/
@@ -772,8 +686,7 @@ void Stairs()
 
 		if(fill)
 			CubeReset();
-		//CubeReset();
-
+		// CubeReset();
 	}
 	DebugSendNum(9999);
 
@@ -785,11 +698,10 @@ void Stairs()
 
 /*******************************************************************************
  * Function Name  : WormQqueeze
- * Description    :
  *******************************************************************************/
-void WormQqueeze()
+void WormQqueeze(void)
 {
-	int size = 2; //1 2
+	int size = 2; // 1 2
 	int axis = Z;
 	int direction = -1; // 1 -1
 
@@ -830,16 +742,13 @@ void WormQqueeze()
 
 /*******************************************************************************
  * Function Name  : CharSpin
- * Description    :
  *******************************************************************************/
-void CharSpin()
+void CharSpin(void)
 {
 	int count = 2;
-	uint8_t bitmap = 2; //0 1 2
+	uint8_t bitmap = 2; // 0 1 2
 
-	uint8_t dybde[] =
-	{ 0, 1, 2, 3, 4, 5, 6, 7, 1, 1, 2, 3, 4, 5, 6, 6, 2, 2, 3, 3, 4, 4, 5, 5, 3,
-			3, 3, 3, 4, 4, 4, 4 };
+	uint8_t dybde[] = {0, 1, 2, 3, 4, 5, 6, 7, 1, 1, 2, 3, 4, 5, 6, 6, 2, 2, 3, 3, 4, 4, 5, 5, 3, 3, 3, 3, 4, 4, 4, 4};
 	int d = 0;
 	int flip = 0;
 	uint8_t off;
@@ -881,18 +790,17 @@ void CharSpin()
 									CubeSetVoxel(y, dybde[8 * off + d++], x);
 								else
 									CubeSetVoxel(dybde[8 * off + d++], 7 - y,
-											x);
+												 x);
 							}
 							else
 							{
 								if(mode % 2 == 0)
 									CubeSetVoxel(y, dybde[31 - 8 * off - d++],
-											x);
+												 x);
 								else
 									CubeSetVoxel(dybde[31 - 8 * off - d++],
-											7 - y, x);
+												 7 - y, x);
 							}
-
 						}
 						else
 							d++;
@@ -906,11 +814,7 @@ void CharSpin()
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void effect_blinky2()
+void effect_blinky2(void)
 {
 	CubeReset();
 
@@ -941,11 +845,7 @@ void effect_blinky2()
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void RandSelParallel()
+void RandSelParallel(void)
 {
 	/*
 	 * 	(AXIS_Z, 0 , 200,1);
@@ -964,34 +864,33 @@ void RandSelParallel()
 	 ModesDelay(1500);
 	 */
 
-	static uint8_t origin = 0; //0 1
+	static uint8_t origin = 0; // 0 1
 	int delay = 100;
-	int mode = 1; //1 2
+	int mode = 1; // 1 2
 
 	for(iterations = 0; iterations < 8; iterations++)
 	{
-
 		char axis = GetRandom() % 6;
 
 		int done;
 		uint8_t cubePos[64];
 		uint8_t pos[64] =
-		{ 0 };
+			{0};
 		int sent = 0;
 
 		while(1)
 		{
 			if(mode == 1)
 			{
-				//uint8_t notdone2 = 1;
-				while(/*notdone2 && */sent < 64)
+				// uint8_t notdone2 = 1;
+				while(/*notdone2 && */ sent < 64)
 				{
 					uint8_t i = GetRandomBig() % 64;
 					if(pos[i] == 0)
 					{
 						sent++;
 						pos[i] += 1;
-						//notdone2 = 0;
+						// notdone2 = 0;
 						break;
 					}
 				}
@@ -1026,10 +925,6 @@ void RandSelParallel()
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 void draw_positions_axis(char axis, uint8_t positions[64], int invert)
 {
 	CubeReset();
@@ -1038,37 +933,21 @@ void draw_positions_axis(char axis, uint8_t positions[64], int invert)
 	{
 		for(uint8_t y = 0; y < 8; y++)
 		{
-			if(axis >= Z)
-				CubeSetVoxel(x, y,
-						invert ?
-								(7 - positions[(x * 8) + y]) :
-								positions[(x * 8) + y]);
-			if(axis == Y)
-				CubeSetVoxel(x,
-						invert ?
-								(7 - positions[(x * 8) + y]) :
-								positions[(x * 8) + y], y);
-			if(axis == X)
-				CubeSetVoxel(
-						invert ?
-								(7 - positions[(x * 8) + y]) :
-								positions[(x * 8) + y], y, x);
+			if(axis >= Z) CubeSetVoxel(x, y, invert ? (7 - positions[(x * 8) + y]) : positions[(x * 8) + y]);
+			if(axis == Y) CubeSetVoxel(x, invert ? (7 - positions[(x * 8) + y]) : positions[(x * 8) + y], y);
+			if(axis == X) CubeSetVoxel(invert ? (7 - positions[(x * 8) + y]) : positions[(x * 8) + y], y, x);
 		}
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 // Light all leds layer by layer,
 // then unset layer by layer
-void effect_loadbar()
+void effect_loadbar(void)
 {
 	CubeReset();
 
-	uint8_t plane = Z; // X Y Z
-	uint8_t direction = 1; //0 not0
+	uint8_t plane = Z;	   // X Y Z
+	uint8_t direction = 1; // 0 not0
 
 	for(uint8_t i = 0; i < 8; i++)
 	{
@@ -1085,10 +964,6 @@ void effect_loadbar()
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 void line_3d(int x1, int y1, int z1, int x2, int y2, int z2)
 {
 	int dx, dy, dz, l, m, n, x_inc, y_inc, z_inc, err_1, err_2, dx2, dy2, dz2;
@@ -1198,9 +1073,8 @@ void line_3d(int x1, int y1, int z1, int x2, int y2, int z2)
 
 /*******************************************************************************
  * Function Name  : PlaneBoing
- * Description    :
  *******************************************************************************/
-void PlaneBoing()
+void PlaneBoing(void)
 {
 	for(iterations = 0; iterations < 3; iterations++)
 	{
@@ -1224,26 +1098,22 @@ void PlaneBoing()
 
 /*******************************************************************************
  * Function Name  : MoveVoxelsAlongZInit
- * Description    :
  *******************************************************************************/
-void MoveVoxelsAlongZInit()
+void MoveVoxelsAlongZInit(void)
 {
 	CubeReset();
-
 	for(uint8_t x = 0; x < 8; x++)
 		for(uint8_t y = 0; y < 8; y++)
 			CubeSetVoxel(x, y, (GetRandom() % 2) * 7);
-
 	ModesDelay(200);
 }
 
 /*******************************************************************************
  * Function Name  : MoveVoxelsAlongZ
- * Description    :
  *******************************************************************************/
 // For each coordinate along X and Y, a voxel is set either at level 0 or at level 7
 // for n iterations, a random voxel is sent to the opposite side of where it was.
-void MoveVoxelsAlongZ()
+void MoveVoxelsAlongZ(void)
 {
 	MoveVoxelsAlongZInit();
 
@@ -1272,7 +1142,6 @@ void MoveVoxelsAlongZ()
 
 /*******************************************************************************
  * Function Name  : MoveVoxelAlongZ
- * Description    :
  *******************************************************************************/
 // Send a voxel flying from one side of the image to the other
 // If its at the bottom, send it to the top..
@@ -1297,7 +1166,6 @@ void MoveVoxelAlongZ(uint8_t x, uint8_t y, uint8_t z)
 
 /*******************************************************************************
  * Function Name  : RainSetMode
- * Description    : Set Rain mode
  *******************************************************************************/
 void RainSetMode(uint8_t axis, uint8_t dir)
 {
@@ -1307,31 +1175,32 @@ void RainSetMode(uint8_t axis, uint8_t dir)
 
 /*******************************************************************************
  * Function Name  : Rain
- * Description    :
  *******************************************************************************/
-void Rain()
+void Rain(void)
 {
 	for(iterations = 0; iterations < 12000 / 150; iterations++)
 	{
-		static uint8_t prevPlane[8]; //2-led falling drops
+		static uint8_t prevPlane[8]; // 2-led falling drops
 		uint8_t newPoint = 7 * (1 - rainDir);
 
 		switch(rainAxis)
 		{
+		default: break;
+
 		case X:
 			for(uint8_t i = 0; i < 8; i++)
 				for(uint8_t j = 0; j < 8; j++)
-					BitWrite(BitIsSet(prevPlane[i], j), image[8*i+j], newPoint);
+					BitWrite(BitIsSet(prevPlane[i], j), image[8 * i + j], newPoint);
 
 			for(uint8_t i = 0; i < GetRandom() % 3; i++)
 				CubeSetVoxel(newPoint, GetRandom() % 8, GetRandom() % 8);
 
-			//A - B = (A xor B) and A
+			// A - B = (A xor B) and A
 			for(uint8_t i = 0; i < 8; i++)
 				for(uint8_t j = 0; j < 8; j++)
 					BitWrite(
-							((BitIsSet(image[8*i+j], 7) ^ BitIsSet(prevPlane[i], j)) & BitIsSet(image[8*i+j], 7)),
-							prevPlane[i], j);
+						((BitIsSet(image[8 * i + j], 7) ^ BitIsSet(prevPlane[i], j)) & BitIsSet(image[8 * i + j], 7)),
+						prevPlane[i], j);
 			break;
 
 		case Y:
@@ -1341,10 +1210,9 @@ void Rain()
 			for(uint8_t i = 0; i < GetRandom() % 3; i++)
 				CubeSetVoxel(GetRandom() % 8, newPoint, GetRandom() % 8);
 
-			//A - B = (A xor B) and A
+			// A - B = (A xor B) and A
 			for(uint8_t i = 0; i < 8; i++)
-				prevPlane[i] = (image[8 * i + newPoint] ^ prevPlane[i])
-						& image[8 * i + newPoint];
+				prevPlane[i] = (image[8 * i + newPoint] ^ prevPlane[i]) & image[8 * i + newPoint];
 			break;
 
 		case Z:
@@ -1354,10 +1222,9 @@ void Rain()
 			for(uint8_t i = 0; i < GetRandom() % 3; i++)
 				CubeSetVoxel(GetRandom() % 8, GetRandom() % 8, newPoint);
 
-			//A - B = (A xor B) and A
+			// A - B = (A xor B) and A
 			for(uint8_t i = 0; i < 8; i++)
-				prevPlane[i] = (image[8 * newPoint + i] ^ prevPlane[i])
-						& image[8 * newPoint + i];
+				prevPlane[i] = (image[8 * newPoint + i] ^ prevPlane[i]) & image[8 * newPoint + i];
 			break;
 		}
 
@@ -1368,7 +1235,6 @@ void Rain()
 
 /*******************************************************************************
  * Function Name  : Shift
- * Description    :
  *******************************************************************************/
 // Shift the entire contents of the image along an axis
 // This is great for effects where you want to draw something
@@ -1387,17 +1253,11 @@ void Shift(uint8_t axis, signed char direction)
 				uint8_t prev = (direction == -1) ? (next + 1) : (next - 1);
 
 				if(axis == Z)
-					(CubeGetVoxel(x, y, prev)) ?
-							CubeSetVoxel(x, y, next) :
-							CubeResetVoxel(x, y, next);
+					(CubeGetVoxel(x, y, prev)) ? CubeSetVoxel(x, y, next) : CubeResetVoxel(x, y, next);
 				if(axis == Y)
-					(CubeGetVoxel(x, prev, y)) ?
-							CubeSetVoxel(x, next, y) :
-							CubeResetVoxel(x, next, y);
+					(CubeGetVoxel(x, prev, y)) ? CubeSetVoxel(x, next, y) : CubeResetVoxel(x, next, y);
 				if(axis == X)
-					(CubeGetVoxel(prev, y, x)) ?
-							CubeSetVoxel(next, y, x) :
-							CubeResetVoxel(next, y, x);
+					(CubeGetVoxel(prev, y, x)) ? CubeSetVoxel(next, y, x) : CubeResetVoxel(next, y, x);
 			}
 		}
 	}
@@ -1408,23 +1268,19 @@ void Shift(uint8_t axis, signed char direction)
 	{
 		for(uint8_t y = 0; y < 8; y++)
 		{
-			if(axis == X)
-				CubeResetVoxel(i, y, x);
-			if(axis == Y)
-				CubeResetVoxel(x, i, y);
-			if(axis == Z)
-				CubeResetVoxel(x, y, i);
+			if(axis == X) CubeResetVoxel(i, y, x);
+			if(axis == Y) CubeResetVoxel(x, i, y);
+			if(axis == Z) CubeResetVoxel(x, y, i);
 		}
 	}
 }
 
 /*******************************************************************************
  * Function Name  : OutlineRandomBoxes
- * Description    :
  *******************************************************************************/
-void Firework()
+void Firework(void)
 {
-	//const uint8_t n = 20;//50 orig 20 stable
+	// const uint8_t n = 20;//50 orig 20 stable
 #define n 20
 
 	uint8_t origin_x = 3, origin_y = 3, origin_z = 3;
@@ -1463,9 +1319,9 @@ void Firework()
 			rand_z = GetRandomBig() % 200 - 100;
 
 			// Movement
-			particles[f][3] = (float) rand_x / 100; // dx
-			particles[f][4] = (float) rand_y / 100; // dy
-			particles[f][5] = (float) rand_z / 100; // dz
+			particles[f][3] = (float)rand_x / 100; // dx
+			particles[f][4] = (float)rand_y / 100; // dy
+			particles[f][5] = (float)rand_z / 100; // dz
 		}
 
 		// explode
@@ -1490,31 +1346,19 @@ void Firework()
 	}
 }
 
-/*******************************************************************************
- * Function Name  : DrawString
- * Description    : Draws string
- * Input			 :
- * 				 :
- *******************************************************************************/
-void DrawString(char *pText, uint8_t mode)
+void DrawString(const char *pText, uint8_t mode)
 {
 	if(!cubeStrPos)
 	{
 		cubeStrPos = 0;
 		flagCubeShift = true;
-
 		pString = pText;
 		stringMode = mode;
-
 		DrawStringShift();
 	}
 }
 
-/*******************************************************************************
- * Function Name  : DrawStringShift
- * Description    :
- *******************************************************************************/
-void DrawStringShift()
+void DrawStringShift(void)
 {
 	uint16_t len = strlen(pString);
 	CubeReset();
@@ -1523,33 +1367,31 @@ void DrawStringShift()
 	{
 		for(uint8_t i = 0; i < 8; i++)
 		{
-			if(!((cubeStrPos + i + 1) % 6) || (cubeStrPos + i + 1) > len * 6) //Blank columns
+			if(!((cubeStrPos + i + 1) % 6) || (cubeStrPos + i + 1) > len * 6) // Blank columns
 			{
 				for(uint8_t c = 0; c < 8; c++)
 				{
 					if(stringMode == STRING_PIPES)
 						CubeResetLine(YPLANE, 7 - i, 7 - c);
 					else
-						//STRING_ONE_FACE
+						// STRING_ONE_FACE
 						image[8 * (7 - c) + 7] &= ~(1 << (7 - i));
 				}
 			}
 			else
 			{
-				uint8_t col = font5x8[5
-						* (*(pString + (cubeStrPos + i) / 6) - 32)
-						+ (cubeStrPos + i) % 6];
+				uint8_t col = font5x8[5 * (*(pString + (cubeStrPos + i) / 6) - 32) + (cubeStrPos + i) % 6];
 
 				for(uint8_t c = 0; c < 8; c++)
 				{
-					if(stringMode == STRING_PIPES) //draw chars - lines - 3D
+					if(stringMode == STRING_PIPES) // draw chars - lines - 3D
 					{
 						if(col & (1 << c))
 							CubeSetLine(YPLANE, 7 - i, 7 - c);
 						else
 							CubeResetLine(YPLANE, 7 - i, 7 - c);
 					}
-					else //STRING_ONE_FACE			draw flat chars
+					else // STRING_ONE_FACE			draw flat chars
 					{
 						if(col & (1 << c))
 							image[8 * (7 - c) + 7] |= (1 << (7 - i));
@@ -1560,24 +1402,24 @@ void DrawStringShift()
 			}
 		}
 
-		//End reached?
-		if(((++cubeStrPos/*+7*/) / 6) >= strlen(pString))
+		// End reached?
+		if(((++cubeStrPos /*+7*/) / 6) >= strlen(pString))
 		{
 			flagCubeShift = false;
 			cubeStrPos = 0;
 		}
 
-		//How long text frame will be displayed
+		// How long text frame will be displayed
 		if(len > 8)
 			frameCubeTime = TIMING / 2;
 		else
 			frameCubeTime = TIMING;
 	}
-	else //STRING_TWO_FACES
+	else // STRING_TWO_FACES
 	{
 		for(uint8_t i = 0; i < 15; i++)
 		{
-			if(!((cubeStrPos + i + 1) % 6) || (cubeStrPos + i + 1) > len * 6) //Blank columns
+			if(!((cubeStrPos + i + 1) % 6) || (cubeStrPos + i + 1) > len * 6) // Blank columns
 			{
 				for(uint8_t c = 0; c < 8; c++)
 				{
@@ -1589,18 +1431,16 @@ void DrawStringShift()
 			}
 			else
 			{
-				uint8_t col = font5x8[5
-						* (*(pString + (cubeStrPos + i) / 6) - 32)
-						+ (cubeStrPos + i) % 6];
+				uint8_t col = font5x8[5 * (*(pString + (cubeStrPos + i) / 6) - 32) + (cubeStrPos + i) % 6];
 
 				for(uint8_t c = 0; c < 8; c++)
 				{
 					if(i <= 7)
 					{
 						if(col & (1 << c))
-							BitSet(image[8*(7-c)+7], 1<<(7-i));
+							BitSet(image[8 * (7 - c) + 7], 1 << (7 - i));
 						else
-							BitReset(image[8*(7-c)+7], 1<<(7-i));
+							BitReset(image[8 * (7 - c) + 7], 1 << (7 - i));
 					}
 					else
 					{
@@ -1608,20 +1448,19 @@ void DrawStringShift()
 							image[8 * (7 - c) + 7 - (i - 7)] |= (1 << (0));
 						else
 							image[8 * (7 - c) + 7 - (i - 7)] &= ~(1 << (0));
-
 					}
 				}
 			}
 		}
 
-		//End reached?
+		// End reached?
 		if(((++cubeStrPos) / 6) >= len)
 		{
 			flagCubeShift = false;
 			cubeStrPos = 0;
 		}
 
-		//How long text frame will be displayed
+		// How long text frame will be displayed
 		if(len > 8)
 			frameCubeTime = TIMING / 3;
 		else
@@ -1631,20 +1470,18 @@ void DrawStringShift()
 
 /*******************************************************************************
  * Function Name  : TrueSnake
- * Description    :
  *******************************************************************************/
-void TrueSnake()
+void TrueSnake(void)
 {
 	for(; snakeLen < SNAKE_MAX_LEN;)
 	{
-		const uint8_t variant[6][3] =
-		{
-		{ 0, 1, 2 },
-		{ 0, 2, 1 },
-		{ 1, 2, 0 },
-		{ 1, 0, 2 },
-		{ 2, 1, 0 },
-		{ 2, 0, 1 } };
+		const uint8_t variant[6][3] = {
+			{0, 1, 2},
+			{0, 2, 1},
+			{1, 2, 0},
+			{1, 0, 2},
+			{2, 1, 0},
+			{2, 0, 1}};
 		uint8_t i = GetRandom() % 6;
 
 		do
@@ -1652,8 +1489,7 @@ void TrueSnake()
 			target[X] = GetRandom() % 8;
 			target[Y] = GetRandom() % 8;
 			target[Z] = GetRandom() % 8;
-		} while(target[X] == Snake[0].voxel[X] || target[Y] == Snake[0].voxel[Y]
-				|| target[Z] == Snake[0].voxel[Z]);
+		} while(target[X] == Snake[0].voxel[X] || target[Y] == Snake[0].voxel[Y] || target[Z] == Snake[0].voxel[Z]);
 
 #ifdef SNAKE_SHOW_TARGET
 		CubeSetVoxel(target[X], target[Y], target[Z]);
@@ -1674,17 +1510,11 @@ void TrueSnake()
 	}
 }
 
-/*******************************************************************************
- * Function Name  : SnakeMove.
- * Description    :
- * Input			 : axis to reach position
- *******************************************************************************/
 void SnakeMove(uint8_t axis)
 {
 	while(!Snake[0].complete[axis])
 	{
-		uint8_t dir;
-
+		uint8_t dir = EQUAL;
 		if(Snake[0].voxel[axis] < target[axis])
 			dir = INCREASE;
 		if(Snake[0].voxel[axis] > target[axis])
@@ -1697,24 +1527,18 @@ void SnakeMove(uint8_t axis)
 			Snake[i].voxel[Z] = Snake[i - 1].voxel[Z];
 		}
 
-		if(dir == INCREASE)
-			Snake[0].voxel[axis]++;
-		if(dir == DECREASE)
-			Snake[0].voxel[axis]--;
+		if(dir == INCREASE) Snake[0].voxel[axis]++;
+		if(dir == DECREASE) Snake[0].voxel[axis]--;
 
-		if(Snake[0].voxel[axis] == target[axis])
-			Snake[0].complete[axis] = 1;
+		if(Snake[0].voxel[axis] == target[axis]) Snake[0].complete[axis] = 1;
 
 		for(uint8_t i = 0; i < snakeLen; i++)
-			CubeSetVoxel(Snake[i].voxel[X], Snake[i].voxel[Y],
-					Snake[i].voxel[Z]);
+			CubeSetVoxel(Snake[i].voxel[X], Snake[i].voxel[Y], Snake[i].voxel[Z]);
 
 		ModesDelay(SNAKE_DELAY);
 
-		if(!(Snake[0].complete[X] && Snake[0].complete[Y]
-				&& Snake[0].complete[Z]))
-			CubeResetVoxel(Snake[snakeLen - 1].voxel[X],
-					Snake[snakeLen - 1].voxel[Y], Snake[snakeLen - 1].voxel[Z]);
+		if(!(Snake[0].complete[X] && Snake[0].complete[Y] && Snake[0].complete[Z]))
+			CubeResetVoxel(Snake[snakeLen - 1].voxel[X], Snake[snakeLen - 1].voxel[Y], Snake[snakeLen - 1].voxel[Z]);
 	}
 }
 
@@ -1748,51 +1572,33 @@ void SnakeMove(uint8_t axis)
 
 volatile uint8_t fb[64];
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void GOL_Begin()
+void GOL_Begin(void)
 {
 	CubeReset();
 	ModesDelay(1000);
-
 	// Create a random starting point for the Game of Life effect.
 	for(uint8_t i = 0; i < 12; i++)
 	{
 		CubeSetVoxel(GetRandom() % 4, GetRandom() % 4, GetRandom() % 4);
 	}
-
 	GOL_Play(40, 80);
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void GOL_Play(int iterations, int delay)
+void GOL_Play(int num_iterations, int delay)
 {
-	for(uint16_t i = 0; i < iterations; i++)
+	for(uint16_t i = 0; i < num_iterations; i++)
 	{
 		GOL_NextGeneration();
-
-		if(GOL_CountChanges() == 0)
-			return;
-
+		if(GOL_CountChanges() == 0) return;
 		GOL_Temp2Cube();
-
 		ModesDelay(delay);
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void GOL_NextGeneration()
+void GOL_NextGeneration(void)
 {
 	for(uint8_t i = 0; i < 64; i++)
-		fb[i] = 0; //reset temp buffer
+		fb[i] = 0; // reset temp buffer
 
 	for(uint8_t x = 0; x < 8; x++)
 	{
@@ -1821,23 +1627,18 @@ void GOL_NextGeneration()
 				else
 				{
 					// Current voxel is dead
-					if(neigh >= GOL_CREATE_MIN && neigh <= GOL_CREATE_MAX)
-						GOL_TempSetVoxel(x, y, z);
+					if(neigh >= GOL_CREATE_MIN && neigh <= GOL_CREATE_MAX) GOL_TempSetVoxel(x, y, z);
 				}
 			}
 		}
 	}
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 uint8_t GOL_CountNeighbors(int x, int y, int z)
 {
 	uint8_t neigh = 0; // number of alive neighbours.
 
-	for(signed int ix = -1; ix < 2; ix++) //offset 1 in each direction in each dimension
+	for(signed int ix = -1; ix < 2; ix++) // offset 1 in each direction in each dimension
 	{
 		for(signed int iy = -1; iy < 2; iy++)
 		{
@@ -1861,8 +1662,7 @@ uint8_t GOL_CountNeighbors(int x, int y, int z)
 						nz = z + iz;
 					}
 
-					if((nx >= 0 && nx <= 7) && (ny >= 0 && ny <= 7)
-							&& (nz >= 0 && nz <= 7))
+					if((nx >= 0 && nx <= 7) && (ny >= 0 && ny <= 7) && (nz >= 0 && nz <= 7))
 					{
 						if(CubeGetVoxel(nx, ny, nz))
 							neigh++;
@@ -1884,57 +1684,35 @@ uint8_t GOL_CountNeighbors(int x, int y, int z)
 	return neigh;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-uint16_t GOL_CountChanges()
+uint16_t GOL_CountChanges(void)
 {
 	uint16_t count = 0;
-
 	for(uint8_t i = 0; i < 64; i++)
 	{
 		if(fb[i] != image[i])
 			count++;
 	}
-
 	return count;
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
-void GOL_Temp2Cube()
+void GOL_Temp2Cube(void)
 {
 	for(uint8_t i = 0; i < 64; i++)
 		image[i] = fb[i];
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 void GOL_TempSetVoxel(int x, int y, int z)
 {
-	if(x > 7 || y > 7 || z > 7)
-		return;
-	//if( (fb[8*z+7-y] & (1<<x)) == 1 ) return ;
-
+	if(x > 7 || y > 7 || z > 7) return;
+	// if( (fb[8*z+7-y] & (1<<x)) == 1 ) return ;
 	fb[8 * z + 7 - y] |= (1 << x);
-	//fb[8*z+y] |= (1 << x);
+	// fb[8*z+y] |= (1 << x);
 }
 
-/*******************************************************************************
- * Function Name  :
- * Description    :
- *******************************************************************************/
 void GOL_TempClearVoxel(int x, int y, int z)
 {
-	if(x > 7 || y > 7 || z > 7)
-		return;
-	//if( (fb[8*z+7-y] & (1<<x)) == 0 ) return ;
-
+	if(x > 7 || y > 7 || z > 7) return;
+	// if( (fb[8*z+7-y] & (1<<x)) == 0 ) return ;
 	fb[8 * z + 7 - y] &= ~(1 << x);
-	//fb[8*x+y] &= ~(1 << x);
+	// fb[8*x+y] &= ~(1 << x);
 }

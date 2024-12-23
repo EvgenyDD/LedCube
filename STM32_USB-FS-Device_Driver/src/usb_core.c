@@ -1071,15 +1071,4 @@ void SetDeviceAddress(uint8_t Val)
 #endif  /* STM32F10X_CL */  
 }
 
-/*******************************************************************************
-* Function Name  : NOP_Process
-* Description    : No operation function.
-* Input          : None.
-* Output         : None.
-* Return         : None.
-*******************************************************************************/
-void NOP_Process(void)
-{
-}
-
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

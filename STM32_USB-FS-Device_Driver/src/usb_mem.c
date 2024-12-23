@@ -66,7 +66,10 @@ void PMAToUserBufferCopy(uint8_t *pbUsrBuf, uint16_t wPMABufAddr, uint16_t wNByt
   pdwVal = (uint32_t *)(wPMABufAddr * 2 + PMAAddr);
   for (i = n; i != 0; i--)
   {
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wcast-align"
     *(uint16_t*)pbUsrBuf++ = *pdwVal++;
+#pragma GCC diagnostic pop
     pbUsrBuf++;
   }
 }
